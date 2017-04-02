@@ -1,23 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2
--- http://www.phpmyadmin.net
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
 --
--- Host: internal-db.s217846.gridserver.com
--- Generation Time: Feb 05, 2017 at 01:06 PM
--- Server version: 5.6.33-79.0
--- PHP Version: 5.6.21
+-- Host: localhost:8889
+-- Generation Time: Apr 02, 2017 at 05:33 PM
+-- Server version: 5.6.33
+-- PHP Version: 7.0.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db217846_isabellerae`
+-- Database: `isabellerae`
 --
 
 -- --------------------------------------------------------
@@ -26,11 +26,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `Blog`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `PostsPerPage` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+CREATE TABLE `Blog` (
+  `ID` int(11) NOT NULL,
+  `PostsPerPage` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Blog`
@@ -45,18 +44,15 @@ INSERT INTO `Blog` (`ID`, `PostsPerPage`) VALUES
 -- Table structure for table `BlogCategory`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogCategory` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogCategory` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('BlogCategory') DEFAULT 'BlogCategory',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Title` varchar(255) DEFAULT NULL,
   `URLSegment` varchar(255) DEFAULT NULL,
-  `BlogID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `BlogID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -64,13 +60,12 @@ CREATE TABLE IF NOT EXISTS `BlogCategory` (
 -- Table structure for table `BlogEntry`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogEntry` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogEntry` (
+  `ID` int(11) NOT NULL,
   `Date` datetime DEFAULT NULL,
   `Author` mediumtext,
-  `Tags` mediumtext,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Tags` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -78,13 +73,12 @@ CREATE TABLE IF NOT EXISTS `BlogEntry` (
 -- Table structure for table `BlogEntry_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogEntry_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogEntry_Live` (
+  `ID` int(11) NOT NULL,
   `Date` datetime DEFAULT NULL,
   `Author` mediumtext,
-  `Tags` mediumtext,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Tags` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -92,18 +86,14 @@ CREATE TABLE IF NOT EXISTS `BlogEntry_Live` (
 -- Table structure for table `BlogEntry_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogEntry_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogEntry_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `Date` datetime DEFAULT NULL,
   `Author` mediumtext,
-  `Tags` mediumtext,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Tags` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -111,14 +101,12 @@ CREATE TABLE IF NOT EXISTS `BlogEntry_versions` (
 -- Table structure for table `BlogHolder`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogHolder` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `AllowCustomAuthors` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowFullEntry` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `OwnerID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `OwnerID` (`OwnerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+CREATE TABLE `BlogHolder` (
+  `ID` int(11) NOT NULL,
+  `AllowCustomAuthors` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowFullEntry` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `OwnerID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -126,14 +114,12 @@ CREATE TABLE IF NOT EXISTS `BlogHolder` (
 -- Table structure for table `BlogHolder_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogHolder_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `AllowCustomAuthors` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowFullEntry` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `OwnerID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `OwnerID` (`OwnerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+CREATE TABLE `BlogHolder_Live` (
+  `ID` int(11) NOT NULL,
+  `AllowCustomAuthors` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowFullEntry` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `OwnerID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -141,19 +127,14 @@ CREATE TABLE IF NOT EXISTS `BlogHolder_Live` (
 -- Table structure for table `BlogHolder_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogHolder_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogHolder_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `AllowCustomAuthors` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowFullEntry` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `OwnerID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `OwnerID` (`OwnerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `AllowCustomAuthors` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowFullEntry` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `OwnerID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -161,26 +142,21 @@ CREATE TABLE IF NOT EXISTS `BlogHolder_versions` (
 -- Table structure for table `BlogPost`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost` (
+  `ID` int(11) NOT NULL,
   `PublishDate` datetime DEFAULT NULL,
   `AuthorNames` varchar(1024) DEFAULT NULL,
   `Summary` mediumtext,
   `FeaturedImageID` int(11) NOT NULL DEFAULT '0',
-  `DoubleHeight` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `DoubleHeight` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ThumbnailImageID` int(11) NOT NULL DEFAULT '0',
   `Introduction` mediumtext,
   `Country` mediumtext,
   `City` mediumtext,
   `DateVisited` date DEFAULT NULL,
   `CountryID` int(11) NOT NULL DEFAULT '0',
-  `CountryIDID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `FeaturedImageID` (`FeaturedImageID`),
-  KEY `ThumbnailImageID` (`ThumbnailImageID`),
-  KEY `CountryID` (`CountryID`),
-  KEY `CountryIDID` (`CountryIDID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+  `CountryIDID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `BlogPost`
@@ -205,14 +181,11 @@ INSERT INTO `BlogPost` (`ID`, `PublishDate`, `AuthorNames`, `Summary`, `Featured
 -- Table structure for table `BlogPost_Authors`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_Authors` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_Authors` (
+  `ID` int(11) NOT NULL,
   `BlogPostID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogPostID` (`BlogPostID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `BlogPost_Authors`
@@ -243,14 +216,11 @@ INSERT INTO `BlogPost_Authors` (`ID`, `BlogPostID`, `MemberID`) VALUES
 -- Table structure for table `BlogPost_Categories`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_Categories` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_Categories` (
+  `ID` int(11) NOT NULL,
   `BlogPostID` int(11) NOT NULL DEFAULT '0',
-  `BlogCategoryID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogPostID` (`BlogPostID`),
-  KEY `BlogCategoryID` (`BlogCategoryID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `BlogCategoryID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -258,26 +228,21 @@ CREATE TABLE IF NOT EXISTS `BlogPost_Categories` (
 -- Table structure for table `BlogPost_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_Live` (
+  `ID` int(11) NOT NULL,
   `PublishDate` datetime DEFAULT NULL,
   `AuthorNames` varchar(1024) DEFAULT NULL,
   `Summary` mediumtext,
   `FeaturedImageID` int(11) NOT NULL DEFAULT '0',
-  `DoubleHeight` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `DoubleHeight` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ThumbnailImageID` int(11) NOT NULL DEFAULT '0',
   `Introduction` mediumtext,
   `Country` mediumtext,
   `City` mediumtext,
   `DateVisited` date DEFAULT NULL,
   `CountryID` int(11) NOT NULL DEFAULT '0',
-  `CountryIDID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `FeaturedImageID` (`FeaturedImageID`),
-  KEY `ThumbnailImageID` (`ThumbnailImageID`),
-  KEY `CountryID` (`CountryID`),
-  KEY `CountryIDID` (`CountryIDID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+  `CountryIDID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `BlogPost_Live`
@@ -302,14 +267,11 @@ INSERT INTO `BlogPost_Live` (`ID`, `PublishDate`, `AuthorNames`, `Summary`, `Fea
 -- Table structure for table `BlogPost_Tags`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_Tags` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_Tags` (
+  `ID` int(11) NOT NULL,
   `BlogPostID` int(11) NOT NULL DEFAULT '0',
-  `BlogTagID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogPostID` (`BlogPostID`),
-  KEY `BlogTagID` (`BlogTagID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `BlogTagID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -317,31 +279,23 @@ CREATE TABLE IF NOT EXISTS `BlogPost_Tags` (
 -- Table structure for table `BlogPost_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `PublishDate` datetime DEFAULT NULL,
   `AuthorNames` varchar(1024) DEFAULT NULL,
   `Summary` mediumtext,
   `FeaturedImageID` int(11) NOT NULL DEFAULT '0',
-  `DoubleHeight` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `DoubleHeight` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ThumbnailImageID` int(11) NOT NULL DEFAULT '0',
   `Introduction` mediumtext,
   `Country` mediumtext,
   `City` mediumtext,
   `DateVisited` date DEFAULT NULL,
   `CountryID` int(11) NOT NULL DEFAULT '0',
-  `CountryIDID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `FeaturedImageID` (`FeaturedImageID`),
-  KEY `ThumbnailImageID` (`ThumbnailImageID`),
-  KEY `CountryID` (`CountryID`),
-  KEY `CountryIDID` (`CountryIDID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=119 ;
+  `CountryIDID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `BlogPost_versions`
@@ -473,8 +427,8 @@ INSERT INTO `BlogPost_versions` (`ID`, `RecordID`, `Version`, `PublishDate`, `Au
 -- Table structure for table `BlogSection`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogSection` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogSection` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('BlogSection') DEFAULT 'BlogSection',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -483,12 +437,8 @@ CREATE TABLE IF NOT EXISTS `BlogSection` (
   `Sort` int(11) NOT NULL DEFAULT '0',
   `MainImageID` int(11) NOT NULL DEFAULT '0',
   `ParentID` int(11) NOT NULL DEFAULT '0',
-  `ImageLayout` mediumtext,
-  PRIMARY KEY (`ID`),
-  KEY `MainImageID` (`MainImageID`),
-  KEY `ClassName` (`ClassName`),
-  KEY `ParentID` (`ParentID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=100 ;
+  `ImageLayout` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `BlogSection`
@@ -498,18 +448,18 @@ INSERT INTO `BlogSection` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, 
 (7, 'BlogSection', '2016-03-07 07:26:47', '2016-02-17 11:12:58', NULL, '<p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Maecenas faucibus mollis interdum. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>\n<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis consectetur purus sit amet fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo.</p>', 1, 25, 8, 'FixedWidth'),
 (8, 'BlogSection', '2016-03-07 07:32:11', '2016-02-24 09:57:05', NULL, '<p class="p1"><span class="s1">After two flights totalling about 10 hours we landed on the tarmac of what looked like a small village, not Ngurah Rai international airport. We were shuffled onto a bus and and hurriedly entered the arrivals hall with USD$35 ready for our Visa, only to be told we don’t need one. All a bit confused, we waited in the the line for a border security officer to stamp us through, passing signs warning us, No visa - instant 5 years jail. Needless to say, the refusal to take our money and these fairly intimidating signs left us a bit worried. We shouldn’t have been, as when we approached the border security officer he laughed at the US money in our passports and then relieved us of all worries saying visa’s have been removed for kiwis, but not australians. After a little giggle and a huge sigh of relief we all started to make our way to the baggage claim with lowered heart rates. After collecting our bags we made our way through to the arrivals hall where I swear there were over 100 people waving signs at us… We found our Buffalo Tours lady and squeezed our way through people trying to take our bags for us, into the tropical warm climate then back into air conditioned van for an hour long trip to Ubud. The ride north through Denpasar was hair raising at times, but we learnt very fast we just had to relax and pretend that we knew the chaotic road rules would work and we’d get to our destination unscathed. When we arrived in Ubud, we were all very tired, so we settled in with a cup of tea and a small cake, a walk around the resort followed by dinner and some shut eye.</span></p>', 1, 0, 6, 'FixedWidth'),
 (10, 'BlogSection', '2016-02-24 23:49:46', '2016-02-24 23:49:45', NULL, NULL, 2, 41, 6, 'FixedWidth'),
-(11, 'BlogSection', '2016-03-07 07:33:05', '2016-02-24 23:51:09', NULL, '<p class="p1"><span class="s1">After a great sleep we awoke to the sound of roosters, something we had to get used too but didn''t know it yet. We decided to take it easy and go for a wander around Ubud, our first stop was a little shop across the road from where we were staying. This is where we got our first taste of haggling and the words ‘Mum’ and ‘Miss’. We didn’t actually buy anything but continued off down the road a bit. It only took about 10 steps to realise too that we must look at where we were walking.  The sidewalks in Bali leave a lot to be desired! Holes, wonky tiles and giant grates you could easily slip into were just the beginning of the game we would start playing called watch out for the…! This continued as we meandered through the streets, and we had to watch out for dogs, scooters, holes, and even piles of bricks. (That literally made up a column as wide as the footpath) I felt like singing the song from the Bear Hunt book… “we can’t go over it, we can’t go through it, we’ll have to go around it!”</span></p>\n<p dir="ltr"> </p>\n<p style="text-align: center;" dir="ltr"><span class="lead"><span><span>I felt like singing the song from the Bear Hunt book… “</span>we can’t go over it, we can’t go through it, we’ll have to go around it!"</span></span> </p>\n<p dir="ltr"> </p>\n<p class="p1"><span class="s1">We visited the Ubud monkey forest in the afternoon, and what an adventure that was! I love monkeys, but I’m somewhat afraid of them. Ever since our guide in Thailand once told us if the bite we’ll end up really sick, and he proceeded to sneak up behind me and grab my leg. Needless to say I jumped out of my skin but then was able to laugh about it. So the Ubud monkey forest cost us a mere Rp30,000 (About NZD$3.30) each and this went to the upkeep of the grounds. They were beautiful, the paths and gardens were well kept, however full of banana skins and Kumara so just watch your step! There were monkeys everywhere, even before you even get inside the grounds as it’s semi-free forest where the monkeys can leave if they please. (A little side story - a guide we had on a different day mentioned to us if we were to stay at the hotel adjacent to the monkey forest, not to leave our togs out to dry on the deck because the Monkeys come over in the evening for a swim in the pool and a wee thieving session of anything they can find… We thought this was quite funny and couldn’t help imagining a monkey in a little yellow polka dot bikini!!) Back in the forest we spent a long time wandering through the shade admiring the babies and their mothers, and just observing the strange and somewhat human-like behaviour of the monkey’s. However, the monkeys don’t seem to observe privacy, they’re quite happy to have grooming sessions or a wee scratch ‘down there’ in the middle of the footpath or in full view of the public. My wee tip for the monkey forest is not to buy the bananas. We worked out pretty quick that unless you wanted to become a monkey magnet then to briskly walk by the banana kiosk and just watch from a distance. But then again, if you don’t mind furry things jumping at you from all angles, then feel free!</span></p>', 3, 0, 6, 'FixedWidth'),
+(11, 'BlogSection', '2016-03-07 07:33:05', '2016-02-24 23:51:09', NULL, '<p class="p1"><span class="s1">After a great sleep we awoke to the sound of roosters, something we had to get used too but didn\'t know it yet. We decided to take it easy and go for a wander around Ubud, our first stop was a little shop across the road from where we were staying. This is where we got our first taste of haggling and the words ‘Mum’ and ‘Miss’. We didn’t actually buy anything but continued off down the road a bit. It only took about 10 steps to realise too that we must look at where we were walking.  The sidewalks in Bali leave a lot to be desired! Holes, wonky tiles and giant grates you could easily slip into were just the beginning of the game we would start playing called watch out for the…! This continued as we meandered through the streets, and we had to watch out for dogs, scooters, holes, and even piles of bricks. (That literally made up a column as wide as the footpath) I felt like singing the song from the Bear Hunt book… “we can’t go over it, we can’t go through it, we’ll have to go around it!”</span></p>\n<p dir="ltr"> </p>\n<p style="text-align: center;" dir="ltr"><span class="lead"><span><span>I felt like singing the song from the Bear Hunt book… “</span>we can’t go over it, we can’t go through it, we’ll have to go around it!"</span></span> </p>\n<p dir="ltr"> </p>\n<p class="p1"><span class="s1">We visited the Ubud monkey forest in the afternoon, and what an adventure that was! I love monkeys, but I’m somewhat afraid of them. Ever since our guide in Thailand once told us if the bite we’ll end up really sick, and he proceeded to sneak up behind me and grab my leg. Needless to say I jumped out of my skin but then was able to laugh about it. So the Ubud monkey forest cost us a mere Rp30,000 (About NZD$3.30) each and this went to the upkeep of the grounds. They were beautiful, the paths and gardens were well kept, however full of banana skins and Kumara so just watch your step! There were monkeys everywhere, even before you even get inside the grounds as it’s semi-free forest where the monkeys can leave if they please. (A little side story - a guide we had on a different day mentioned to us if we were to stay at the hotel adjacent to the monkey forest, not to leave our togs out to dry on the deck because the Monkeys come over in the evening for a swim in the pool and a wee thieving session of anything they can find… We thought this was quite funny and couldn’t help imagining a monkey in a little yellow polka dot bikini!!) Back in the forest we spent a long time wandering through the shade admiring the babies and their mothers, and just observing the strange and somewhat human-like behaviour of the monkey’s. However, the monkeys don’t seem to observe privacy, they’re quite happy to have grooming sessions or a wee scratch ‘down there’ in the middle of the footpath or in full view of the public. My wee tip for the monkey forest is not to buy the bananas. We worked out pretty quick that unless you wanted to become a monkey magnet then to briskly walk by the banana kiosk and just watch from a distance. But then again, if you don’t mind furry things jumping at you from all angles, then feel free!</span></p>', 3, 0, 6, 'FixedWidth'),
 (12, 'BlogSection', '2016-02-25 09:37:32', '2016-02-24 23:57:35', NULL, NULL, 4, 0, 6, 'FixedWidth'),
 (13, 'BlogSection', '2016-03-07 07:33:47', '2016-02-25 09:39:52', NULL, '<p class="p1"><span class="s1">We planned an excursion for our next day in Ubud, but it meant driving up to Mount Batur and cycling 35km’s back downhill to Ubud. </span></p>\n<p class="lead" style="text-align: center;" dir="ltr"><span>Today is the day I nearly died. </span>Well… sort of.</p>\n<p class="p1"><span class="s1">Here’s the story. We took a little minibus up to a high vantage point looking over Mount Batur and Batur lake. On the way we picked up more guests and guides, more that could actually fit in the minibus, but that’s the balinese way. We got to the top and it was so picturesque up there, I wish we had spent more time admiring the view. We had a spot of breakfast and used some of the worst toilets I’ve ever experienced. (So far that is…) We then jumped on some bikes which all had rather faulty brakes. This worried us as we were going on a downhill ride and I would have thought brakes were a fairly necessary thing to be functioning correctly. Feeling somewhat nervous, we started the adventure downhill to Ubud. We cycled through small villages and near rice paddies, the scenery was beautiful. We stopped a few times and admired the views, we even walked onto a rice farm and helped a family harvest some rice in exchange for photographs. It was a family affair, with each member of the family having a job, even grandma, who was blowing grass out from the rice grains by throwing it up into the air. She had clearly had many years of experience! We continued on and our guide mentioned that we were about to go up a large-ish hill. He didn’t quite tell us how big it was until we saw the damn thing. It was long, twisty and very very steep. It took a while but we pushed our way up to the top. On foot. He said we only had one more hill, and this is where I thought I was going to die. Backing up a few kilometers, my chain had fallen off and the guide at the back of the group and I had stopped to fix it. This set us back a bit so we were cycling super fast to catch up, I was coming down a hill ready to take a corner when I saw our first guide waving ‘down, down’ to me. I thought he meant go down a gear as the hill was close. Well, the hill was close, but a car was closer, on a one way bridge, and I was heading straight for it. Turns out he was telling me to slow down, but I thought I’d demonstrate my drifting skills by skidding sideways in some gravel and leaving a puff of smoke on my tail. I didn’t fall over, but I sure did get one heck of a fright! After the excitement and shaky legs, l walked up the next hill and caught my breath. We made it to a little village near Ubud and after dodging 1 car, about 10 dogs, 20 scooters and 100 potholes I was definitely ready for some food. Our guide provided us with lunch and a short dance performance from some young girls - one of whom was his daughter. We then took a minibus back to the resort and had a swim to aid our aching behinds. Tomorrow will be a quiet day. </span></p>', 5, 0, 6, 'FixedWidth'),
 (14, 'BlogSection', '2016-02-25 09:47:52', '2016-02-25 09:47:50', NULL, NULL, 6, 50, 6, 'FullWidth'),
 (15, 'BlogSection', '2016-03-07 07:34:21', '2016-02-25 09:49:58', NULL, '<p class="p1"><span class="s1">After a thrill seeking day yesterday, we opted for a more relaxed wander around Ubud. We went in a different direction than the first day wandering by many little shops and eateries. We found a number of touristy shops selling the same things, but something that really amused us were the amount of wooden penis shaped bottle openers. We’d see them in all sizes and colours and even souvenir packs of 6 to take home for your friends! We assumed it was aimed at the aussies… but found it awfully funny walking down the street with stands of these things sticking out of the shopfront onto the footpath! We enjoyed a wander around the market, and realised just how cheap things were! A dress I saw in a shop only a block away was going to cost me Rp200,000 (NZD$22) but in the market, the same dress cost me Rp60,000 (NZD$6.50). The shop keepers will do anything to get your attention, and it became a bit of a joke! Mum was a target… most conversations went a bit like this, “Beautiful daughters Mum!” “Top Mum” “Dress Mum” “Shoes Mum” This Mum” That Mum” and we were similar, with anything we glanced at, “Scarf Miss!”. We turned this into a joke and everything became ‘something Mum’ for the rest of the trip. </span></p>', 7, 0, 6, 'FixedWidth'),
 (16, 'BlogSection', '2016-02-25 09:53:50', '2016-02-25 09:53:49', NULL, NULL, 8, 0, 6, 'FixedWidth'),
-(17, 'BlogSection', '2016-03-07 07:34:44', '2016-02-25 09:54:21', NULL, '<p class="p1"><span class="s1">We bumped into some friends from home as we wandered through the street of Ubud, and they recommended we try a little restaurant called Ibu Rai. So we visited it and the food was beautiful but the story of the restaurant was even more touching. Ibu Rai became well know with travellers after her husband died, leaving her with six small children. She got a small pension from the government and set up a warung (food stall) where she sold food to travellers in the 60’s. Travel books began to recommend Ibu Rai warung as a place to find safe and affordable food in Ubud. Four of her children graduated from university and became self supporting. In the 70’s she was no longer selling food, but she sold pictures from a shop in front of her house. In 1986, her son Dewa Gede opened a restaurant and as a tribute to his mother''s courage, he called in Ibu Rai. Ibu Rai died in 2004 and because of the respect the community held for her she had a very large cremation. Today, Ibu Rai’s grandson runs the restaurant and a blurb about her and her life is printed on the menus to explain what a lovely story this restaurant has, created by such an inspiring lady.</span></p>', 9, 0, 6, 'FixedWidth'),
+(17, 'BlogSection', '2016-03-07 07:34:44', '2016-02-25 09:54:21', NULL, '<p class="p1"><span class="s1">We bumped into some friends from home as we wandered through the street of Ubud, and they recommended we try a little restaurant called Ibu Rai. So we visited it and the food was beautiful but the story of the restaurant was even more touching. Ibu Rai became well know with travellers after her husband died, leaving her with six small children. She got a small pension from the government and set up a warung (food stall) where she sold food to travellers in the 60’s. Travel books began to recommend Ibu Rai warung as a place to find safe and affordable food in Ubud. Four of her children graduated from university and became self supporting. In the 70’s she was no longer selling food, but she sold pictures from a shop in front of her house. In 1986, her son Dewa Gede opened a restaurant and as a tribute to his mother\'s courage, he called in Ibu Rai. Ibu Rai died in 2004 and because of the respect the community held for her she had a very large cremation. Today, Ibu Rai’s grandson runs the restaurant and a blurb about her and her life is printed on the menus to explain what a lovely story this restaurant has, created by such an inspiring lady.</span></p>', 9, 0, 6, 'FixedWidth'),
 (18, 'BlogSection', '2016-03-07 08:55:38', '2016-02-25 09:55:59', NULL, '<p class="p1"><span class="s1">After four days in Ubud we headed south to Seminyak where we were based for the remainder of our Bali holiday. We had a travel and explore day and realised that Seminyak was a lot busier than Ubud. We started a new game called dodge the scooter in Seminyak. There were more scooters here than in Ubud and with so many broken footpaths, we walked on the road quite a lot… sometimes feeling like we were risking our lives but the drivers were very good at dodging us and any other obstacles that got in their way. </span></p>\n<p class="p2"> </p>\n<p class="p1"><span class="s1">On our Second day in Seminyak, we organised a tour to see the Green Village and School in a region called Abiansemal. This was the most expensive tour we did at US$33 but all proceeds go towards the Indonesian scholar programme, which sponsors 20 Indonesian students attend the Green School. Our first impressions of the Green Village were just breathtaking. We arrived to see a small office, toilet block and cafe all crafted from Bamboo. This was minimal however compared to the masterpiece homes we toured. There were 6 level homes crafted from bamboo in curving shapes that naturally occur when using the flexible material. Everything was bamboo or another sustainable material such as stone. Toilet seats, stairs, furniture, walls, taps, anything and everything was bamboo! All of the doors in the Green village are circular and pivot in the centre. This allows for the bamboo to change shape over time without the square shape of a door sagging. After the village we visited the factory where we saw the piles of different bamboo, types, shapes and lengths. All bamboo must be treated to extend it’s life and prevent termites so there were multiple long baths where the bamboo would soak in a boron solution before drying ready to be used to build. After the factory we headed to the Green School which was the most eye opening experience. The classrooms here are open air, the paths are cobbled to create awareness, there’s a bird sanctuary and a mud pit used for education! The school prides itself in being an holistic learning centre and is working towards becoming off grid. The school already uses solar power and are in the final stages of making a whirlpool hydro generator. The Green village, school and factory and such inspiring places, not just for their beauty but for their drive to make the world a more sustainable place by using materials that are plentiful and creating jobs for local people. </span></p>', 10, 53, 6, 'FixedWidth'),
 (19, 'BlogSection', '2016-02-25 10:02:35', '2016-02-25 10:01:24', NULL, NULL, 11, 54, 6, 'FixedWidth'),
 (20, 'BlogSection', '2016-03-07 08:56:38', '2016-02-25 10:04:51', NULL, '<p class="p1"><span class="s1">We did some more research into locations of Rice Paddies the night we came back from The Green Village. Coming down to Seminyak meant we were further away from the lush greenery that is in Northern Bali. After looking into various things to do up north we came up with an itinerary that would take us to the lake at the bottom of Mount Batur, though the rice fields of Jatiluweh and to Tanah Lot temple. The day started nice and early and we met up with our Driver Wayan. Wayan was a fantastic guide and we learnt a lot about Bali while with him for the day. Wayan story 1: When we asked him about his name Wayan explained to us that all firstborn males in a family are called Wayan, and second born males are called Murray. This must be why we saw so many ‘Wayan’s eatery’ on the side of the roads. Moving on. We drove up towards the region of Tabanan which hold Bali’s national botanical gardens. These were impressive and so large. We discovered a beautiful bamboo made greenhouse that held only orchids and a huge cactus house too. We went via a fruit and vege market in a small Muslim town. It was interesting seeing the lack of tourists in this very cultural area. After this we visited a temple called Pura Ulun Danu Beratan. This is a temple that has been built on a lake. It’s close to shore and has a foot bridge connection but it sure makes for beautiful photographs. En route back down the island we took the windiest and pot hole-iest route ever to the area of Jatiluweh. It’s know for large rice terraces and breathtaking views. We stopped for lunch here then went for a walk through the fields. It’s here we have Wayan story 2. He told us that the water troughs that run through the towns are fought over by the locals who are desperate to soak their rice. They sneak out at night to divert the water into their fields rather than their neighbours fields. And they treat it a bit like a game. we drove through more rice fields on our way to Tanah Lot temple. This temple is built out of a rock in the ocean and can only be walked out to at low tide. We sat up on a ridge to watch the sun fade behind the temple and the birds go crazy flying about getting home to their nests. Bali sure does put on a good sunset! </span></p>', 12, 0, 6, 'FixedWidth'),
 (21, 'BlogSection', '2016-02-25 10:11:38', '2016-02-25 10:11:36', NULL, NULL, 13, 59, 6, 'FullWidth'),
-(22, 'BlogSection', '2016-03-07 08:56:59', '2016-02-25 10:12:49', NULL, '<p class="p1"><span class="s1">After a big day out we opted for a chilled out morning and then a ride south of Bali to Ulawatu. There’s another temple here and we weren''t quite templed out yet. This one was on top of a cliff and was also a great spot for watching the sun go down. As the sun set, we piled into an outdoor arena with a heap of other tourists to watch a traditional Kek Kek Trance dance. Although I didn’t quite understand the story, the performers were amazing. There was a group of men ranging in ages from teens to seniors and they all had flawless rhythm. This was the trance part of the show, they kept the sound going for almost an hour. As the sun went down, out came the fire dance. They created a circle of hay in the centre and set it alight as the finale! Quite spectacular! After this we went to the Four Seasons Hotel for a special 21st birthday Dinner for Chelsea. We even had the waiter to create a special cake with her name on it and candles! We had some beautiful wine and strong cocktail overlooking the waves. This was a perfect end to our beautiful Bali adventure. </span></p>', 14, 0, 6, 'FixedWidth'),
+(22, 'BlogSection', '2016-03-07 08:56:59', '2016-02-25 10:12:49', NULL, '<p class="p1"><span class="s1">After a big day out we opted for a chilled out morning and then a ride south of Bali to Ulawatu. There’s another temple here and we weren\'t quite templed out yet. This one was on top of a cliff and was also a great spot for watching the sun go down. As the sun set, we piled into an outdoor arena with a heap of other tourists to watch a traditional Kek Kek Trance dance. Although I didn’t quite understand the story, the performers were amazing. There was a group of men ranging in ages from teens to seniors and they all had flawless rhythm. This was the trance part of the show, they kept the sound going for almost an hour. As the sun went down, out came the fire dance. They created a circle of hay in the centre and set it alight as the finale! Quite spectacular! After this we went to the Four Seasons Hotel for a special 21st birthday Dinner for Chelsea. We even had the waiter to create a special cake with her name on it and candles! We had some beautiful wine and strong cocktail overlooking the waves. This was a perfect end to our beautiful Bali adventure. </span></p>', 14, 0, 6, 'FixedWidth'),
 (23, 'BlogSection', '2016-02-25 10:14:51', '2016-02-25 10:14:49', NULL, NULL, 15, 60, 6, 'FullWidth'),
 (24, 'BlogSection', '2016-03-27 11:13:15', '2016-03-07 09:18:35', NULL, NULL, 2, 0, 13, 'FixedWidth'),
 (25, 'BlogSection', '2016-03-27 11:13:15', '2016-03-07 09:19:49', NULL, NULL, 5, 70, 13, 'FixedWidth'),
@@ -521,8 +471,8 @@ INSERT INTO `BlogSection` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, 
 (32, 'BlogSection', '2016-03-27 11:40:42', '2016-03-07 16:45:19', NULL, NULL, 12, 0, 14, 'FixedWidth'),
 (33, 'BlogSection', '2016-03-27 11:40:42', '2016-03-07 16:46:05', NULL, NULL, 13, 99, 14, 'FixedWidth'),
 (34, 'BlogSection', '2016-03-27 11:49:18', '2016-03-07 16:48:37', NULL, NULL, 18, 0, 14, 'FixedWidth'),
-(35, 'BlogSection', '2016-03-07 17:09:40', '2016-03-07 17:09:38', 'Welcome...', '<p class="h3">Hi, I''m Isabelle.</p>\n<p>I''m a kiwi embarking on a traveling adventure. This blog will show lots of photos and some writing of my travels. </p>\n<p>My destinations are Thailand, Laos, Vietnam, Singapore, Europe and the UK. </p>', 1, 0, 15, 'FixedWidth'),
-(36, 'BlogSection', '2016-03-27 11:13:15', '2016-03-27 11:03:16', NULL, '<p><span id="docs-internal-guid-2cf1064a-b7bd-b793-df8e-2435fe18a853"><span>This trip was my second time in Bangkok, and I wasn''t to sure what to expect, more of the same or something different. As it turns out, Bangkok is such a huge city, almost everything we saw was new! We stayed along Silom road, which is know to be quite touristy. The moment we stepped outside, the words, "Tuk Tuk!", "Taxi" or "Temple Tour" came at us from all directions, we politely say no as the follow us down the street waving their laminated cards with tourist destinations on them. </span><span><br class="kix-line-break"></span></span></p>', 1, 0, 13, 'FixedWidth'),
+(35, 'BlogSection', '2016-03-07 17:09:40', '2016-03-07 17:09:38', 'Welcome...', '<p class="h3">Hi, I\'m Isabelle.</p>\n<p>I\'m a kiwi embarking on a traveling adventure. This blog will show lots of photos and some writing of my travels. </p>\n<p>My destinations are Thailand, Laos, Vietnam, Singapore, Europe and the UK. </p>', 1, 0, 15, 'FixedWidth'),
+(36, 'BlogSection', '2016-03-27 11:13:15', '2016-03-27 11:03:16', NULL, '<p><span id="docs-internal-guid-2cf1064a-b7bd-b793-df8e-2435fe18a853"><span>This trip was my second time in Bangkok, and I wasn\'t to sure what to expect, more of the same or something different. As it turns out, Bangkok is such a huge city, almost everything we saw was new! We stayed along Silom road, which is know to be quite touristy. The moment we stepped outside, the words, "Tuk Tuk!", "Taxi" or "Temple Tour" came at us from all directions, we politely say no as the follow us down the street waving their laminated cards with tourist destinations on them. </span><span><br class="kix-line-break"></span></span></p>', 1, 0, 13, 'FixedWidth'),
 (37, 'BlogSection', '2016-03-27 11:13:15', '2016-03-27 11:05:00', NULL, '<p><span id="docs-internal-guid-2cf1064a-b7bf-79e9-eab3-3740d87a8473"><span>During our time in Bangkok we did visit some of the touristy things, like the Wat Pho, the golden reclining Buddha. A Buddha can be in many poses and you can tell what they mean often by the hand gestures. A reclining Buddha depicts the last remaining moments of life on Earth of the Historical Buddha before dying and entering entering Nirvana. Because this Buddha was able to seek enlightenment in this lifetime, they were able to escape the endless cycle of birth, death and reincarnation. The Wat Pho is one of the most famous of these statues lying at 46 metres long. In the temple ground we spent about 2 hours wandering and amazed at the beautiful detail put into each structure. The was a lot of mosaic and a lot of gold which with the light reflecting on them looked rather magical. </span></span></p>', 3, 0, 13, 'FixedWidth'),
 (38, 'BlogSection', '2016-03-27 11:13:15', '2016-03-27 11:05:16', NULL, '<p><span id="docs-internal-guid-2cf1064a-b7bf-ae25-183e-0b47e149477c"><span>An hour bus ride took us to the Damnoen Saduak Floating Markets outside of Bangkok city. I went here last time I was in Bangkok and loved it, however this time I was sad to see the lack of Thai boats on the water. The number of tourist paddle boats greatly outnumbered those genuine fruit, veggie, food or coconut ice cream boats. The tourists were creating a tourist destination for themselves, selfie stick in hand. </span></span></p>', 6, 0, 13, 'FixedWidth'),
 (39, 'BlogSection', '2016-03-27 11:13:15', '2016-03-27 11:05:46', NULL, '<p><span id="docs-internal-guid-2cf1064a-b7c0-1199-8949-7e3748b7cf80"><span>We caught many Tuk Tuks around the city, to all sorts of places and the sights you see along the way are fascinating. I loved watching the food carts be cycled through the traffic, weaving in and out of the countless pink or green and yellow Taxis. Life is different here. </span><br></span></p>', 9, 0, 13, 'FixedWidth'),
@@ -530,43 +480,43 @@ INSERT INTO `BlogSection` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, 
 (41, 'BlogSection', '2016-03-27 11:13:15', '2016-03-27 11:09:00', NULL, NULL, 4, 0, 13, 'FixedWidth'),
 (42, 'BlogSection', '2016-03-27 11:13:15', '2016-03-27 11:11:29', NULL, NULL, 7, 111, 13, 'FixedWidth'),
 (43, 'BlogSection', '2016-03-27 11:40:42', '2016-03-27 11:25:55', NULL, '<p><span id="docs-internal-guid-53e907fa-b7d1-cb69-049e-9117f3197647"><span>As the train rumbled into the mountainous region of Doi Khun Tan Nation Park, I knew we were approaching a new area of Thailand. Sunrise from the train was beautiful with the sun the reddest I had ever seen. </span><span><br class="kix-line-break"></span></span></p>', 2, 0, 14, 'FixedWidth'),
-(44, 'BlogSection', '2016-03-27 11:40:42', '2016-03-27 11:27:28', NULL, '<p>We arrived at our guesthouse absolutely knackered, my feet feeling unstable and my body unsure what kind of terrain it was on. We ventured out to a small cafe called ''Graph'' down one of the soi''s (streets) near where were staying and ordered a nice strong Iced coffee. The streets off the main drag are so narrow here, we sat on the step of the cafe and watched as the scooters, dogs and a lady selling icecream rode her bike with umbrella and sidecar passed us with a big grin. I got the feeling people in Chiang Mai are friendlier than in Bangkok.</p>\n<p>Chiang Mai has a square moat that runs all the way around the perimeter of the old city, and part of the brick gates and corners are still there. We sat and watched the pigeons for a while at the Tha Pae Gate.</p>', 4, 0, 14, 'FixedWidth'),
+(44, 'BlogSection', '2016-03-27 11:40:42', '2016-03-27 11:27:28', NULL, '<p>We arrived at our guesthouse absolutely knackered, my feet feeling unstable and my body unsure what kind of terrain it was on. We ventured out to a small cafe called \'Graph\' down one of the soi\'s (streets) near where were staying and ordered a nice strong Iced coffee. The streets off the main drag are so narrow here, we sat on the step of the cafe and watched as the scooters, dogs and a lady selling icecream rode her bike with umbrella and sidecar passed us with a big grin. I got the feeling people in Chiang Mai are friendlier than in Bangkok.</p>\n<p>Chiang Mai has a square moat that runs all the way around the perimeter of the old city, and part of the brick gates and corners are still there. We sat and watched the pigeons for a while at the Tha Pae Gate.</p>', 4, 0, 14, 'FixedWidth'),
 (46, 'BlogSection', '2016-03-27 11:40:42', '2016-03-27 11:27:55', NULL, '<p><span id="docs-internal-guid-53e907fa-b7d4-7a09-f675-404fa5685045"><span>After our train hangover had gone away, we ventured south to the Saturday night market. Food, craft and music galore! As we were shuffling our way through the crowds, suddenly at our feet was a line of five musicians, each playing a different kind of percussion instrument and singing along. Down a side alley we find some food, barbecue pork, dumplings and a dessert of sticky rice and mango. This is something that sounded like a strange combo but as the signature dish of the area, we had to try it and it was surprisingly nice! After more strolling we came across a kid rock band, belting it out on the drums, guitar and bass... who would have guessed! </span><span><br class="kix-line-break"></span></span></p>', 6, 0, 14, 'FixedWidth'),
-(47, 'BlogSection', '2016-03-27 11:40:42', '2016-03-27 11:28:07', NULL, '<p><span id="docs-internal-guid-53e907fa-b7d4-a450-5fdd-718d0113462b"><span>In Chiang Mai, the thing to do is a cooking class, so we enrolled ourselves in one with the Baan Thai School for the next day. We were first taken to a market, where our guide showed us different herbs and spices and also the very strange eggplants. Here the eggplant is green, and either the size of a pea or the size of your pinky finger. They''re apparently very strong, I didn''t get a chance to try one, I don’t think I’m really missing out. At the school I learned how to cook Chicken Cashew Nut, Tom Yam Soup, Papaya Salad and Koi Soi, and traditional Chiang Mai dish. </span><span><br class="kix-line-break"></span></span></p>', 9, 0, 14, 'FixedWidth'),
-(48, 'BlogSection', '2016-03-27 11:40:42', '2016-03-27 11:28:21', NULL, '<p><span id="docs-internal-guid-53e907fa-b7d4-d62b-ffce-367787301e6e"><span>We visited Doi Suthep one evening which is a gorgeous temple on top of a hill overlooking the city. Our driver had has car breakdown halfway up the hill so we flagged another red car to get us all the way up. The temple was beautiful, it was the most golden temple I''ve ever seen, and being sunset, it was glowing! There are so many intricate details it was hard to take it all in. After seeing the actual temple we went around the grounds which were equally as picturesque. There were many monks walking around and I was happy to be standing at the right place at the right time to capture one contemplating life as he looked over the city. </span><span><br class="kix-line-break"></span></span></p>', 11, 0, 14, 'FixedWidth'),
-(49, 'BlogSection', '2016-03-27 11:40:42', '2016-03-27 11:28:36', NULL, '<p><span id="docs-internal-guid-53e907fa-b7d5-0e59-11df-e3d3c3629f35"><span>Another area of Chiang Mai that we explored was Nimmenheimen road. A new ''hip'' area of town with many little craft shops selling unique items you would see at any other market. We spent a few hours strolling up and down, and tried out some Roti bread with savoury topping for dinner! We also went into the huge Maya centre to cool off a bit, and found other little crafty shops and a place called ''Camp''. It was an awesome co-working/study area for people with free internet. It was packed to overflowing, and looked like a cool creative space if you were working on the road.</span></span></p>', 14, 0, 14, 'FixedWidth'),
-(50, 'BlogSection', '2016-03-27 11:52:39', '2016-03-27 11:28:48', NULL, '<p dir="ltr"><span>Chiang Mai has become my favourite place in Thailand. It''s like Bangkok, but on a smaller, friendlier scale. Everyone is kind to one another and you''re not hassled too much to get in a Tuk Tuk. I would love to visit again.</span></p>\n<p dir="ltr"><span><span id="docs-internal-guid-53e907fa-b7ea-0bf1-391b-a3480d1c9e8e"><span>Oh and did I forget to mention… we went to a cabaret, a lady boy cabaret. And Rihanna was there. That’s all.</span></span></span></p>', 16, 0, 14, 'FixedWidth'),
+(47, 'BlogSection', '2016-03-27 11:40:42', '2016-03-27 11:28:07', NULL, '<p><span id="docs-internal-guid-53e907fa-b7d4-a450-5fdd-718d0113462b"><span>In Chiang Mai, the thing to do is a cooking class, so we enrolled ourselves in one with the Baan Thai School for the next day. We were first taken to a market, where our guide showed us different herbs and spices and also the very strange eggplants. Here the eggplant is green, and either the size of a pea or the size of your pinky finger. They\'re apparently very strong, I didn\'t get a chance to try one, I don’t think I’m really missing out. At the school I learned how to cook Chicken Cashew Nut, Tom Yam Soup, Papaya Salad and Koi Soi, and traditional Chiang Mai dish. </span><span><br class="kix-line-break"></span></span></p>', 9, 0, 14, 'FixedWidth'),
+(48, 'BlogSection', '2016-03-27 11:40:42', '2016-03-27 11:28:21', NULL, '<p><span id="docs-internal-guid-53e907fa-b7d4-d62b-ffce-367787301e6e"><span>We visited Doi Suthep one evening which is a gorgeous temple on top of a hill overlooking the city. Our driver had has car breakdown halfway up the hill so we flagged another red car to get us all the way up. The temple was beautiful, it was the most golden temple I\'ve ever seen, and being sunset, it was glowing! There are so many intricate details it was hard to take it all in. After seeing the actual temple we went around the grounds which were equally as picturesque. There were many monks walking around and I was happy to be standing at the right place at the right time to capture one contemplating life as he looked over the city. </span><span><br class="kix-line-break"></span></span></p>', 11, 0, 14, 'FixedWidth'),
+(49, 'BlogSection', '2016-03-27 11:40:42', '2016-03-27 11:28:36', NULL, '<p><span id="docs-internal-guid-53e907fa-b7d5-0e59-11df-e3d3c3629f35"><span>Another area of Chiang Mai that we explored was Nimmenheimen road. A new \'hip\' area of town with many little craft shops selling unique items you would see at any other market. We spent a few hours strolling up and down, and tried out some Roti bread with savoury topping for dinner! We also went into the huge Maya centre to cool off a bit, and found other little crafty shops and a place called \'Camp\'. It was an awesome co-working/study area for people with free internet. It was packed to overflowing, and looked like a cool creative space if you were working on the road.</span></span></p>', 14, 0, 14, 'FixedWidth'),
+(50, 'BlogSection', '2016-03-27 11:52:39', '2016-03-27 11:28:48', NULL, '<p dir="ltr"><span>Chiang Mai has become my favourite place in Thailand. It\'s like Bangkok, but on a smaller, friendlier scale. Everyone is kind to one another and you\'re not hassled too much to get in a Tuk Tuk. I would love to visit again.</span></p>\n<p dir="ltr"><span><span id="docs-internal-guid-53e907fa-b7ea-0bf1-391b-a3480d1c9e8e"><span>Oh and did I forget to mention… we went to a cabaret, a lady boy cabaret. And Rihanna was there. That’s all.</span></span></span></p>', 16, 0, 14, 'FixedWidth'),
 (51, 'BlogSection', '2016-03-27 11:40:42', '2016-03-27 11:30:29', NULL, NULL, 5, 119, 14, 'FixedWidth'),
 (52, 'BlogSection', '2016-03-27 11:40:42', '2016-03-27 11:35:20', NULL, NULL, 7, 0, 14, 'FixedWidth'),
 (53, 'BlogSection', '2016-03-27 11:40:42', '2016-03-27 11:39:02', NULL, NULL, 10, 124, 14, 'FixedWidth'),
 (63, 'BlogSection', '2016-03-27 11:49:18', '2016-03-27 11:49:00', NULL, NULL, 15, 0, 14, 'FixedWidth'),
-(64, 'BlogSection', '2016-03-30 13:38:19', '2016-03-30 13:25:50', NULL, '<p>Wat Rong Khun, or The White temple is such a beautiful sight. It''s striking colour and reflective mirror make it one the most unique temple I''ve ever seen. It''s still a work in progress though, even though billions and billions of Vietnamese Dong have already been put into it''s creation. </p>\n<p>There''s a journey, and it starts in Hell. You must cross a bridge with a sea of hands and as we were informed many times, it is very bad luck to stop or pause here because this is the symbol of re-birth. After that you walk over another bridge through the Gate of Heaven the temple itself, and although photos are not allowed, I assure you the mural inside is spectacular! It''s carefully drawn with all kinds of Superheros and cartoons, from batman to the hulk and hello kitty to a dalek. This temple is most definitely one of a kind.</p>', 1, 136, 17, 'FixedWidth'),
+(64, 'BlogSection', '2016-03-30 13:38:19', '2016-03-30 13:25:50', NULL, '<p>Wat Rong Khun, or The White temple is such a beautiful sight. It\'s striking colour and reflective mirror make it one the most unique temple I\'ve ever seen. It\'s still a work in progress though, even though billions and billions of Vietnamese Dong have already been put into it\'s creation. </p>\n<p>There\'s a journey, and it starts in Hell. You must cross a bridge with a sea of hands and as we were informed many times, it is very bad luck to stop or pause here because this is the symbol of re-birth. After that you walk over another bridge through the Gate of Heaven the temple itself, and although photos are not allowed, I assure you the mural inside is spectacular! It\'s carefully drawn with all kinds of Superheros and cartoons, from batman to the hulk and hello kitty to a dalek. This temple is most definitely one of a kind.</p>', 1, 136, 17, 'FixedWidth'),
 (65, 'BlogSection', '2016-03-30 13:27:58', '2016-03-30 13:27:56', NULL, NULL, 2, 0, 17, 'FixedWidth'),
 (66, 'BlogSection', '2016-03-30 14:01:37', '2016-03-30 13:51:24', NULL, '<p><span id="docs-internal-guid-35926024-c7ca-c04e-02d3-3f40b1b0b9ce"><span>We were in Houay Xai, Laos. A small town on the edge of the Mekong River with Thailand on the other side. About 20 of us eager backpackers were piling into three Tuk Tuks, packs on top, and us in the back. It kind of looked like a clown car, given the Tuk Tuks are painted bright colours and all. We drove a few minutes down the road to the riverbank where dozens of longboats were all parked up, nose on the riverbank. This way! This way! our tour guide was yelling, he was ushering us towards one of these boats, it was blue until I saw the inside. Hello Kitty Paradise. Pink seats, pink curtains and Hello Kitty blankets. Did I just walk into Japan?</span></span></p>', 1, 0, 16, 'FixedWidth'),
-(67, 'BlogSection', '2016-03-30 14:01:37', '2016-03-30 13:57:45', NULL, '<p><span id="docs-internal-guid-35926024-c7d1-22ac-3a04-0a9831dbd805"><span>This was home for the next two days. We were making our way along the river to Luang Prabang. On the first dat we were on the boat for 7 hours, it was fascinating spotting the small villages as we sailed by. We passed lots of water buffalos and cows, who enjoy swimming and drinking from the river. There was also a group of kids doing back flips off the bank at one point! For a good hour or so we were floating down no man''s land between Laos to the north and Thailand to the south. We came to a checkpoint where the boat was pulled over and two security guards came on board. We all watching with interest as the searched the boat for illegal drugs and people (as our guide said). They even lifted loose floorboards to check! Given the all clear off we sailed again. </span><span><br class="kix-line-break"></span></span></p>', 3, 0, 16, 'FixedWidth'),
+(67, 'BlogSection', '2016-03-30 14:01:37', '2016-03-30 13:57:45', NULL, '<p><span id="docs-internal-guid-35926024-c7d1-22ac-3a04-0a9831dbd805"><span>This was home for the next two days. We were making our way along the river to Luang Prabang. On the first dat we were on the boat for 7 hours, it was fascinating spotting the small villages as we sailed by. We passed lots of water buffalos and cows, who enjoy swimming and drinking from the river. There was also a group of kids doing back flips off the bank at one point! For a good hour or so we were floating down no man\'s land between Laos to the north and Thailand to the south. We came to a checkpoint where the boat was pulled over and two security guards came on board. We all watching with interest as the searched the boat for illegal drugs and people (as our guide said). They even lifted loose floorboards to check! Given the all clear off we sailed again. </span><span><br class="kix-line-break"></span></span></p>', 3, 0, 16, 'FixedWidth'),
 (68, 'BlogSection', '2016-03-30 14:01:37', '2016-03-30 14:01:10', NULL, NULL, 2, 150, 16, 'FullWidth'),
-(69, 'BlogSection', '2016-03-30 14:04:36', '2016-03-30 14:04:11', NULL, '<p><span id="docs-internal-guid-35926024-c7d1-22ac-3a04-0a9831dbd805"><span><span id="docs-internal-guid-35926024-c7d6-ffaf-816d-94b7b1050150"><span>Around 4pm, we arrived at a small village called Ban Pak Nguey. It''s a village of 1000 people and were were staying in families homes for the night. We jumped of the boat and went for a walk around the village. We visited the school, which had 4 classrooms. A few people from our group gave some impromptu lessons and the kids loved it! Afterwards, the kids beckoned us out to the field where a dusty game of soccer was played. We then made our way back down to the Mekong, for it was bath time. Along with the locals, we swam in the Mekong, some washing hair, others just enjoying the water. I sat on a rock for a while watching as a elderly lady spent about an hour washing all her family’s clothes in the river then finishing off with a bath herself. It was a different way of life to experience. As the sun went down we headed back up to the village for some dinner, a blessing ceremony and a swig of homemade whisky. </span><span><br class="kix-line-break"></span></span></span></span></p>', 4, 151, 16, 'FixedWidth'),
+(69, 'BlogSection', '2016-03-30 14:04:36', '2016-03-30 14:04:11', NULL, '<p><span id="docs-internal-guid-35926024-c7d1-22ac-3a04-0a9831dbd805"><span><span id="docs-internal-guid-35926024-c7d6-ffaf-816d-94b7b1050150"><span>Around 4pm, we arrived at a small village called Ban Pak Nguey. It\'s a village of 1000 people and were were staying in families homes for the night. We jumped of the boat and went for a walk around the village. We visited the school, which had 4 classrooms. A few people from our group gave some impromptu lessons and the kids loved it! Afterwards, the kids beckoned us out to the field where a dusty game of soccer was played. We then made our way back down to the Mekong, for it was bath time. Along with the locals, we swam in the Mekong, some washing hair, others just enjoying the water. I sat on a rock for a while watching as a elderly lady spent about an hour washing all her family’s clothes in the river then finishing off with a bath herself. It was a different way of life to experience. As the sun went down we headed back up to the village for some dinner, a blessing ceremony and a swig of homemade whisky. </span><span><br class="kix-line-break"></span></span></span></span></p>', 4, 151, 16, 'FixedWidth'),
 (70, 'BlogSection', '2016-03-30 14:07:46', '2016-03-30 14:07:44', NULL, NULL, 5, 154, 16, 'FixedWidth'),
-(71, 'BlogSection', '2016-03-30 14:09:35', '2016-03-30 14:09:06', NULL, '<p><span id="docs-internal-guid-35926024-c7db-60c2-d390-d814796aff2b"><span>After a sleep on the hardest mattress and pillow ever (Maybe second hardest actually, thinking back to the horrific experience on a rice pillow in Japan) we gobbled down an egg on toast it was back to the boat for another day. Most of us were still really tired so we slept for a couple of hours, Hello Kitty blankets and all. The morning on the Mekong was spectacular though, the mist was still settled in the layered hills and the air was crisp and cool. Eventually the mist rose and the day turned out to be a beaut! As we were nearing Luang Prabang we stopped off at Pak Ou Caves, there are thousand and thousands of buddhas in these caves, it was quite a different experience to any other temple we''d seen. This was my first experience of giant steps... I’m sure the whole country had an obsession with them!</span><span><br class="kix-line-break"></span></span></p>', 6, 163, 16, 'FixedWidth'),
+(71, 'BlogSection', '2016-03-30 14:09:35', '2016-03-30 14:09:06', NULL, '<p><span id="docs-internal-guid-35926024-c7db-60c2-d390-d814796aff2b"><span>After a sleep on the hardest mattress and pillow ever (Maybe second hardest actually, thinking back to the horrific experience on a rice pillow in Japan) we gobbled down an egg on toast it was back to the boat for another day. Most of us were still really tired so we slept for a couple of hours, Hello Kitty blankets and all. The morning on the Mekong was spectacular though, the mist was still settled in the layered hills and the air was crisp and cool. Eventually the mist rose and the day turned out to be a beaut! As we were nearing Luang Prabang we stopped off at Pak Ou Caves, there are thousand and thousands of buddhas in these caves, it was quite a different experience to any other temple we\'d seen. This was my first experience of giant steps... I’m sure the whole country had an obsession with them!</span><span><br class="kix-line-break"></span></span></p>', 6, 163, 16, 'FixedWidth'),
 (72, 'BlogSection', '2016-03-30 14:15:27', '2016-03-30 14:15:25', NULL, NULL, 7, 166, 16, 'FixedWidth'),
 (74, 'BlogSection', '2016-03-30 15:34:23', '2016-03-30 14:33:36', NULL, '<p><span id="docs-internal-guid-d4b3212e-c7f3-4de6-fa7a-7905d4e27e52"><span> </span></span></p>', 2, 239, 18, 'FixedWidth'),
 (75, 'BlogSection', '2016-03-30 14:47:08', '2016-03-30 14:34:52', NULL, NULL, 3, 189, 18, 'FullWidth'),
-(78, 'BlogSection', '2016-03-30 14:47:08', '2016-03-30 14:39:24', NULL, '<p><span id="docs-internal-guid-d4b3212e-c7f6-d479-4513-4c4f0f1c37ec"><span>Ah Luang Prabang, the little french town that grew on me. As we jumped off the boat into a minivan for our drive to the guesthouse, I was surprised and unsure where Luang Prabang and I were going to get along. We got to the guesthouse, and still I was unsure. There wasn''t anything familiar, no Seven Elevens or Cafes, just random piles of thing for sale in what looked like peoples living rooms. Lucky we arrived late ish, so we had some dinner and tucked in for the night. </span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>The next day, we realised we were staying next to a giant hill, called Mount Phousi. It''s pronounced ''Pussy'' and this provided our group with many jokes over our time in Luang Prabang. Walking around Mount Phousi, we discovered a quaint little township, a street lined with cafes, shops and French influence everywhere! I fell in love. That didn''t take long. The shutters on all the buildings, and the French patisseries selling fresh croissants and pain au chocolat started showing around every corner. There also were many ''Phousi'' things around to cause a giggle... Phousi Guest House, Phousi Cafe and Phousi Markets.... you get the idea! </span><span><br class="kix-line-break"></span></span></p>', 1, 0, 18, 'FixedWidth'),
-(79, 'BlogSection', '2016-03-30 14:47:08', '2016-03-30 14:40:58', NULL, '<p><span id="docs-internal-guid-d4b3212e-c7f8-26f8-a8ad-abb50513eb37"><span>Whilst in Luang Prabang, we visited an elephant rescue sanctuary, where we fed and went for a ride on the elephants. The elephants used to be used for logging, so were very used to heavy items on their backs. The sanctuary is fairly new so some of the elephants were still in the transition period. They had chains draped on their backs, but these would slowly be removed as their behaviour improved. There were also a couple of little rascal baby elephants, who love to squash the sugar cane and bamboo. Elephants eat 200 - 300 kg of food each day, which is 10% of their body weight. In the evenings, the elephants go for a walk to the nearby forest area and get a 300 metre chain attached to a tree. They are very clever, and only walk out and back along the chain so they don''t get tangled in the trees. They get a new area to discover and eat every night. The baby elephants remain on the sanctuary grounds because they have been know to get tangled in the trees and there''s enough food for them there. It was really an eye opening experience, seeing the way ex-logging and poorly treated elephants are being trained for human interaction and a better life. </span><span><br class="kix-line-break"></span></span></p>', 4, 0, 18, 'FixedWidth'),
+(78, 'BlogSection', '2016-03-30 14:47:08', '2016-03-30 14:39:24', NULL, '<p><span id="docs-internal-guid-d4b3212e-c7f6-d479-4513-4c4f0f1c37ec"><span>Ah Luang Prabang, the little french town that grew on me. As we jumped off the boat into a minivan for our drive to the guesthouse, I was surprised and unsure where Luang Prabang and I were going to get along. We got to the guesthouse, and still I was unsure. There wasn\'t anything familiar, no Seven Elevens or Cafes, just random piles of thing for sale in what looked like peoples living rooms. Lucky we arrived late ish, so we had some dinner and tucked in for the night. </span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>The next day, we realised we were staying next to a giant hill, called Mount Phousi. It\'s pronounced \'Pussy\' and this provided our group with many jokes over our time in Luang Prabang. Walking around Mount Phousi, we discovered a quaint little township, a street lined with cafes, shops and French influence everywhere! I fell in love. That didn\'t take long. The shutters on all the buildings, and the French patisseries selling fresh croissants and pain au chocolat started showing around every corner. There also were many \'Phousi\' things around to cause a giggle... Phousi Guest House, Phousi Cafe and Phousi Markets.... you get the idea! </span><span><br class="kix-line-break"></span></span></p>', 1, 0, 18, 'FixedWidth'),
+(79, 'BlogSection', '2016-03-30 14:47:08', '2016-03-30 14:40:58', NULL, '<p><span id="docs-internal-guid-d4b3212e-c7f8-26f8-a8ad-abb50513eb37"><span>Whilst in Luang Prabang, we visited an elephant rescue sanctuary, where we fed and went for a ride on the elephants. The elephants used to be used for logging, so were very used to heavy items on their backs. The sanctuary is fairly new so some of the elephants were still in the transition period. They had chains draped on their backs, but these would slowly be removed as their behaviour improved. There were also a couple of little rascal baby elephants, who love to squash the sugar cane and bamboo. Elephants eat 200 - 300 kg of food each day, which is 10% of their body weight. In the evenings, the elephants go for a walk to the nearby forest area and get a 300 metre chain attached to a tree. They are very clever, and only walk out and back along the chain so they don\'t get tangled in the trees. They get a new area to discover and eat every night. The baby elephants remain on the sanctuary grounds because they have been know to get tangled in the trees and there\'s enough food for them there. It was really an eye opening experience, seeing the way ex-logging and poorly treated elephants are being trained for human interaction and a better life. </span><span><br class="kix-line-break"></span></span></p>', 4, 0, 18, 'FixedWidth'),
 (80, 'BlogSection', '2016-03-30 14:49:11', '2016-03-30 14:44:51', NULL, '<p><span id="docs-internal-guid-d4b3212e-c7ff-1d34-e850-39e4abafa09f"><span>After the elephant visit we headed out into the bush further to discover the Kuang Si Waterfalls. There are a beautiful set of three pools with layering cascades. We had a nice dip and had the fish nibble our feet! In the waterfall park, there is also a rescue sanctuary for moon bears. we got to see bears for the first time, hanging out in hammocks and trees.... so cute!</span><span><br class="kix-line-break"></span></span></p>', 6, 0, 18, 'FixedWidth'),
 (81, 'BlogSection', '2016-03-30 14:47:08', '2016-03-30 14:46:02', NULL, NULL, 5, 201, 18, 'FullWidth'),
 (82, 'BlogSection', '2016-03-30 14:50:12', '2016-03-30 14:50:10', NULL, NULL, 7, 202, 18, 'FullWidth'),
 (83, 'BlogSection', '2016-03-30 14:50:45', '2016-03-30 14:50:38', NULL, '<p><span id="docs-internal-guid-d4b3212e-c801-0d48-f3a6-349b6c9f93e3"><span>Luang Prabang was such a lovely place to stay for 5 nights, the French influence was really enjoyable, I think I improved my french while there too!! </span></span></p>', 8, 0, 18, 'FixedWidth'),
 (84, 'BlogSection', '2016-03-30 14:52:23', '2016-03-30 14:52:18', NULL, NULL, 9, 205, 18, 'FixedWidth'),
 (85, 'BlogSection', '2016-03-30 14:58:36', '2016-03-30 14:58:34', NULL, '<p><span id="docs-internal-guid-d1120993-c808-56b0-100a-45ae2617e677"><span>In Luang Prabang we went out to an organic farm to discover the life of a rice farmer. We had a very energetic guide named Lee, who explained to us the process of making sticking rice. </span></span></p>', 1, 0, 19, 'FixedWidth'),
-(86, 'BlogSection', '2016-03-30 15:08:04', '2016-03-30 14:59:10', NULL, '<p><span id="docs-internal-guid-d1120993-c80b-7198-b962-d3aed7b4a8b4"><span>In the field, the first step is to plough with a water buffalo... or a faster mechanical water buffalo sometimes! We ploughed the fields with a lovely chap called Rudolf. After ploughing, you can sprinkle the rice, and watch it germinate for a few weeks. It''s then planted in clumps and straight lines to grow up. Once fully grown, the rice is harvested and the grains are smacked out by whacking handfuls on a wooden board. Afterwards, winnowing the rice to blow away the grass. The process continues, where you smash the rice with a somewhat giant mortar and pestle the shake and throw to get the husks and dust away. Because the rice is heavy, it will just fall back down. Then you have a grain! It can ground down further to flour using two stones, or be cooked up ready to eat. </span><span><br class="kix-line-break"></span></span></p>', 2, 208, 19, 'FixedWidth'),
+(86, 'BlogSection', '2016-03-30 15:08:04', '2016-03-30 14:59:10', NULL, '<p><span id="docs-internal-guid-d1120993-c80b-7198-b962-d3aed7b4a8b4"><span>In the field, the first step is to plough with a water buffalo... or a faster mechanical water buffalo sometimes! We ploughed the fields with a lovely chap called Rudolf. After ploughing, you can sprinkle the rice, and watch it germinate for a few weeks. It\'s then planted in clumps and straight lines to grow up. Once fully grown, the rice is harvested and the grains are smacked out by whacking handfuls on a wooden board. Afterwards, winnowing the rice to blow away the grass. The process continues, where you smash the rice with a somewhat giant mortar and pestle the shake and throw to get the husks and dust away. Because the rice is heavy, it will just fall back down. Then you have a grain! It can ground down further to flour using two stones, or be cooked up ready to eat. </span><span><br class="kix-line-break"></span></span></p>', 2, 208, 19, 'FixedWidth'),
 (87, 'BlogSection', '2016-03-30 15:05:59', '2016-03-30 15:01:34', NULL, NULL, 3, 0, 19, 'FixedWidth'),
-(88, 'BlogSection', '2016-03-30 15:03:09', '2016-03-30 15:02:29', NULL, '<p dir="ltr"><span>To cook the perfect sticky rice, Laos style. Rinse twice (very important because I''ve heard that part so many times with emphasis on the two!) then soak the rice overnight. In the morning, bring a pot of watcher to the boil and place a bamboo basket on top ensuring the basket isn''t actually touching that water. Place the rice in the basket and steam for about 30 minutes. And Voila! Perfect sticky rice.</span></p>', 4, 215, 19, 'FullWidth'),
+(88, 'BlogSection', '2016-03-30 15:03:09', '2016-03-30 15:02:29', NULL, '<p dir="ltr"><span>To cook the perfect sticky rice, Laos style. Rinse twice (very important because I\'ve heard that part so many times with emphasis on the two!) then soak the rice overnight. In the morning, bring a pot of watcher to the boil and place a bamboo basket on top ensuring the basket isn\'t actually touching that water. Place the rice in the basket and steam for about 30 minutes. And Voila! Perfect sticky rice.</span></p>', 4, 215, 19, 'FullWidth'),
 (89, 'BlogSection', '2016-03-30 15:04:54', '2016-03-30 15:04:52', NULL, NULL, 5, 218, 19, 'FixedWidth'),
-(90, 'BlogSection', '2016-03-30 15:14:11', '2016-03-30 15:13:57', NULL, '<p><span id="docs-internal-guid-494aaa03-c816-39b1-5f1a-e1c778886bb2"><span>We arrived in Vang Vieng around 3pm, feeling a bit worse for ware after a torturous 6 hour drive over the windiest hills I have ever been on, dodging chickens, dogs, scooters and humans by only millimetres! We decided that we''d go for an explore in the countryside and ride 7kms to this blue lagoon...</span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>Getting out of the Vang Vieng township was the best idea! The hills are so beautiful, very pointy and jagged, unlike anything familiar.  The ride was flat and we had the most comfy bikes on the planet! (Don''t know how we managed to swing that one) After an hour or so, stopping for some cows and a few picture stops, we arrived at the blue lagoon... or really just a pretty swimming hole. There were swings and ropes for the dare devils to jump in from, or the lazy river part where we hung out watching. The water was cold and refreshing after a very hot bike ride!</span></span></p>', 1, 0, 20, 'FixedWidth'),
+(90, 'BlogSection', '2016-03-30 15:14:11', '2016-03-30 15:13:57', NULL, '<p><span id="docs-internal-guid-494aaa03-c816-39b1-5f1a-e1c778886bb2"><span>We arrived in Vang Vieng around 3pm, feeling a bit worse for ware after a torturous 6 hour drive over the windiest hills I have ever been on, dodging chickens, dogs, scooters and humans by only millimetres! We decided that we\'d go for an explore in the countryside and ride 7kms to this blue lagoon...</span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>Getting out of the Vang Vieng township was the best idea! The hills are so beautiful, very pointy and jagged, unlike anything familiar.  The ride was flat and we had the most comfy bikes on the planet! (Don\'t know how we managed to swing that one) After an hour or so, stopping for some cows and a few picture stops, we arrived at the blue lagoon... or really just a pretty swimming hole. There were swings and ropes for the dare devils to jump in from, or the lazy river part where we hung out watching. The water was cold and refreshing after a very hot bike ride!</span></span></p>', 1, 0, 20, 'FixedWidth'),
 (91, 'BlogSection', '2016-03-30 15:19:41', '2016-03-30 15:17:42', NULL, '<p><span id="docs-internal-guid-494aaa03-c81b-c108-ce47-c31f319eac86"><span>The ride back was spectacular, with the layered mountains creating a stunning backdrop to a sunset photo!</span></span></p>', 2, 222, 20, 'FixedWidth'),
 (92, 'BlogSection', '2016-03-30 15:21:29', '2016-03-30 15:21:24', NULL, NULL, 3, 229, 20, 'FixedWidth'),
-(93, 'BlogSection', '2016-03-30 15:43:47', '2016-03-30 15:43:46', NULL, '<p dir="ltr"><span>This is the story of the most eventful-in-a-bad-way day so far on our trip through South East Asia. </span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>We were in Vang Vieng, Laos. On a search for some kind of breakfast that would sit comfortably in our stomachs, for we had a 6 hour windy bus journey ahead of us. And if the day before winding up and down steep mountains was anything to go by, I could only hope it got flatter. </span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>So we sat down and asked for coffee, obviously the most important breakfast item and set 1, a baguette and fried egg. This was about the 6th or 7th baguette and fried egg breakfast we''d had in Laos, the French really left their imprint and taught everyone how to cook great baguettes. I was really enjoying this particular one, crusty on the outside and steaming hot on the inside. It was delicious. That was, until I saw some spots in the bread, I thought it was yeast but oh no, this was more than yeast. It was a whole damn family of ants! Cooked. Into my baguette. I was super thrilled by this discovery, free extra protein in my breakfast couldn''t be more wanted. We quickly passed some Kip to the lady and walked back to the guesthouse. I wasn''t feeling ill, I probably didn''t eat many but it still left me feeling queasy. </span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>I''m not sure if it was the ants or the horrendous roads that 2 hours after breakfast made me scream STOP!!! to our poor Lao driver who spoke not a word of english. He pulled the van over and I leapt out feeling the worst sickness in a long time. After composing myself and drinking some water we continued, my new position. Front passenger seat. I think they were all afraid I''d puke in the van, I was just pleased to be able to see the road and have air con. We continued for another 4 hours on roads with potholes every 50 metres, gravel every other 100 metres and Lao drivers who think any side of the road is theirs. I think we had about 30 chicken near misses, 20 scooter dodges and 10 dog swerves.</span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>Eventually, we made it to Vientiane. The big foggy capital of Laos. I was so ready to jump off that bus and lay down for a bit but no. We did a tiki tour around the city, seeing more stupas, buddhas and temples, a museum and documentary and Vientianes version of the Arc de Triomphe. Where third incident were to occur, the worst of all. My phone got stolen by a lady selling sticky rice in a bamboo shoot. </span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>So yeah, I was tired and we were all aimlessly wandering around this Arc in the middle of the road and I was sitting on a park bench. Not sure what happened between me sitting down, getting up and walking a bit down the path but my phone was not with me. The whole group had a look, and someone thought they saw the lady selling sticky rice in a bamboo shoot was holding it. Needless to say she scampered into the dust and I was left talking to the Police who didn''t really seem like they could care less. But the story gets better...</span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>Our group leader told me later on that evening the the Policeman was ''so sure'' he knew that lady and that she would be on the bus tomorrow morning so he can get my phone back. I thought it would be an unlikely story, and the more it developed, the more I understood I''d have to bribe him about 150,000 Kip ($30 NZD) to retrieve my phone. Maybe. It all sounded too good to be true and this guy was up for a quick buck on the side. The next day, our group leader rings me again, he says this time the Policeman is 100% sure he knows where the woman lives, but it''s 50kms away from the city. If I pay him 1,000,000 Kip ($200 NZD) he''ll go and get it, Or I can give him a smaller bribe to get the address and go myself. Not sure I was up to confronting a random woman in some remote village who is meant to have my phone. My guess is it''s already for sale somewhere down a back alley way. </span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>I''ve accepted the loss and got my handwritten report from  the police for insurance... so we''ll see how that goes. Good thing I''m in Asia and phones are cheap here!</span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>Onwards and upwards to Vietnam, clearly Laos has had enough of me!</span><span><br class="kix-line-break"></span></p>', 1, 0, 21, 'FixedWidth'),
+(93, 'BlogSection', '2016-03-30 15:43:47', '2016-03-30 15:43:46', NULL, '<p dir="ltr"><span>This is the story of the most eventful-in-a-bad-way day so far on our trip through South East Asia. </span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>We were in Vang Vieng, Laos. On a search for some kind of breakfast that would sit comfortably in our stomachs, for we had a 6 hour windy bus journey ahead of us. And if the day before winding up and down steep mountains was anything to go by, I could only hope it got flatter. </span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>So we sat down and asked for coffee, obviously the most important breakfast item and set 1, a baguette and fried egg. This was about the 6th or 7th baguette and fried egg breakfast we\'d had in Laos, the French really left their imprint and taught everyone how to cook great baguettes. I was really enjoying this particular one, crusty on the outside and steaming hot on the inside. It was delicious. That was, until I saw some spots in the bread, I thought it was yeast but oh no, this was more than yeast. It was a whole damn family of ants! Cooked. Into my baguette. I was super thrilled by this discovery, free extra protein in my breakfast couldn\'t be more wanted. We quickly passed some Kip to the lady and walked back to the guesthouse. I wasn\'t feeling ill, I probably didn\'t eat many but it still left me feeling queasy. </span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>I\'m not sure if it was the ants or the horrendous roads that 2 hours after breakfast made me scream STOP!!! to our poor Lao driver who spoke not a word of english. He pulled the van over and I leapt out feeling the worst sickness in a long time. After composing myself and drinking some water we continued, my new position. Front passenger seat. I think they were all afraid I\'d puke in the van, I was just pleased to be able to see the road and have air con. We continued for another 4 hours on roads with potholes every 50 metres, gravel every other 100 metres and Lao drivers who think any side of the road is theirs. I think we had about 30 chicken near misses, 20 scooter dodges and 10 dog swerves.</span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>Eventually, we made it to Vientiane. The big foggy capital of Laos. I was so ready to jump off that bus and lay down for a bit but no. We did a tiki tour around the city, seeing more stupas, buddhas and temples, a museum and documentary and Vientianes version of the Arc de Triomphe. Where third incident were to occur, the worst of all. My phone got stolen by a lady selling sticky rice in a bamboo shoot. </span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>So yeah, I was tired and we were all aimlessly wandering around this Arc in the middle of the road and I was sitting on a park bench. Not sure what happened between me sitting down, getting up and walking a bit down the path but my phone was not with me. The whole group had a look, and someone thought they saw the lady selling sticky rice in a bamboo shoot was holding it. Needless to say she scampered into the dust and I was left talking to the Police who didn\'t really seem like they could care less. But the story gets better...</span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>Our group leader told me later on that evening the the Policeman was \'so sure\' he knew that lady and that she would be on the bus tomorrow morning so he can get my phone back. I thought it would be an unlikely story, and the more it developed, the more I understood I\'d have to bribe him about 150,000 Kip ($30 NZD) to retrieve my phone. Maybe. It all sounded too good to be true and this guy was up for a quick buck on the side. The next day, our group leader rings me again, he says this time the Policeman is 100% sure he knows where the woman lives, but it\'s 50kms away from the city. If I pay him 1,000,000 Kip ($200 NZD) he\'ll go and get it, Or I can give him a smaller bribe to get the address and go myself. Not sure I was up to confronting a random woman in some remote village who is meant to have my phone. My guess is it\'s already for sale somewhere down a back alley way. </span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>I\'ve accepted the loss and got my handwritten report from  the police for insurance... so we\'ll see how that goes. Good thing I\'m in Asia and phones are cheap here!</span><span><br class="kix-line-break"></span><span><br class="kix-line-break"></span><span>Onwards and upwards to Vietnam, clearly Laos has had enough of me!</span><span><br class="kix-line-break"></span></p>', 1, 0, 21, 'FixedWidth'),
 (94, 'BlogSection', '2016-03-30 16:16:59', '2016-03-30 16:16:57', NULL, NULL, 1, 249, 22, 'FixedWidth'),
 (95, 'BlogSection', '2016-03-30 16:18:22', '2016-03-30 16:18:20', NULL, NULL, 2, 257, 22, 'FixedWidth'),
 (96, 'BlogSection', '2016-03-30 16:19:22', '2016-03-30 16:19:18', NULL, NULL, 3, 0, 22, 'FixedWidth'),
@@ -580,15 +530,12 @@ INSERT INTO `BlogSection` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, 
 -- Table structure for table `BlogSection_SectionImages`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogSection_SectionImages` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogSection_SectionImages` (
+  `ID` int(11) NOT NULL,
   `BlogSectionID` int(11) NOT NULL DEFAULT '0',
   `ImageID` int(11) NOT NULL DEFAULT '0',
-  `SortOrder` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogSectionID` (`BlogSectionID`),
-  KEY `ImageID` (`ImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=183 ;
+  `SortOrder` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `BlogSection_SectionImages`
@@ -752,18 +699,15 @@ INSERT INTO `BlogSection_SectionImages` (`ID`, `BlogSectionID`, `ImageID`, `Sort
 -- Table structure for table `BlogTag`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogTag` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogTag` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('BlogTag') DEFAULT 'BlogTag',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Title` varchar(255) DEFAULT NULL,
   `URLSegment` varchar(255) DEFAULT NULL,
-  `BlogID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `BlogID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -771,12 +715,11 @@ CREATE TABLE IF NOT EXISTS `BlogTag` (
 -- Table structure for table `BlogTree`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogTree` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogTree` (
+  `ID` int(11) NOT NULL,
   `Name` varchar(255) DEFAULT NULL,
-  `LandingPageFreshness` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LandingPageFreshness` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -784,12 +727,11 @@ CREATE TABLE IF NOT EXISTS `BlogTree` (
 -- Table structure for table `BlogTree_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogTree_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogTree_Live` (
+  `ID` int(11) NOT NULL,
   `Name` varchar(255) DEFAULT NULL,
-  `LandingPageFreshness` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LandingPageFreshness` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -797,17 +739,13 @@ CREATE TABLE IF NOT EXISTS `BlogTree_Live` (
 -- Table structure for table `BlogTree_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogTree_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogTree_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `Name` varchar(255) DEFAULT NULL,
-  `LandingPageFreshness` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LandingPageFreshness` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -815,14 +753,11 @@ CREATE TABLE IF NOT EXISTS `BlogTree_versions` (
 -- Table structure for table `Blog_Contributors`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_Contributors` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Blog_Contributors` (
+  `ID` int(11) NOT NULL,
   `BlogID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -830,14 +765,11 @@ CREATE TABLE IF NOT EXISTS `Blog_Contributors` (
 -- Table structure for table `Blog_Editors`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_Editors` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Blog_Editors` (
+  `ID` int(11) NOT NULL,
   `BlogID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -845,11 +777,10 @@ CREATE TABLE IF NOT EXISTS `Blog_Editors` (
 -- Table structure for table `Blog_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `PostsPerPage` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+CREATE TABLE `Blog_Live` (
+  `ID` int(11) NOT NULL,
+  `PostsPerPage` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Blog_Live`
@@ -864,16 +795,12 @@ INSERT INTO `Blog_Live` (`ID`, `PostsPerPage`) VALUES
 -- Table structure for table `Blog_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Blog_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `PostsPerPage` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+  `PostsPerPage` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Blog_versions`
@@ -899,14 +826,11 @@ INSERT INTO `Blog_versions` (`ID`, `RecordID`, `Version`, `PostsPerPage`) VALUES
 -- Table structure for table `Blog_Writers`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_Writers` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Blog_Writers` (
+  `ID` int(11) NOT NULL,
   `BlogID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -914,18 +838,16 @@ CREATE TABLE IF NOT EXISTS `Blog_Writers` (
 -- Table structure for table `ContactRequest`
 --
 
-CREATE TABLE IF NOT EXISTS `ContactRequest` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ContactRequest` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('ContactRequest') DEFAULT 'ContactRequest',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Name` mediumtext,
   `Email` mediumtext,
   `Message` mediumtext,
-  `Sort` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Sort` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -933,18 +855,15 @@ CREATE TABLE IF NOT EXISTS `ContactRequest` (
 -- Table structure for table `Country`
 --
 
-CREATE TABLE IF NOT EXISTS `Country` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Country` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('Country') DEFAULT 'Country',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Title` mediumtext,
   `Sort` int(11) NOT NULL DEFAULT '0',
-  `PatternID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `PatternID` (`PatternID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `PatternID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Country`
@@ -968,14 +887,11 @@ INSERT INTO `Country` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, `Sor
 -- Table structure for table `Country_BlogPosts`
 --
 
-CREATE TABLE IF NOT EXISTS `Country_BlogPosts` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Country_BlogPosts` (
+  `ID` int(11) NOT NULL,
   `CountryID` int(11) NOT NULL DEFAULT '0',
-  `BlogPostID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `CountryID` (`CountryID`),
-  KEY `BlogPostID` (`BlogPostID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `BlogPostID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -983,11 +899,10 @@ CREATE TABLE IF NOT EXISTS `Country_BlogPosts` (
 -- Table structure for table `ErrorPage`
 --
 
-CREATE TABLE IF NOT EXISTS `ErrorPage` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `ErrorCode` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+CREATE TABLE `ErrorPage` (
+  `ID` int(11) NOT NULL,
+  `ErrorCode` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ErrorPage`
@@ -1003,11 +918,10 @@ INSERT INTO `ErrorPage` (`ID`, `ErrorCode`) VALUES
 -- Table structure for table `ErrorPage_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `ErrorPage_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `ErrorCode` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+CREATE TABLE `ErrorPage_Live` (
+  `ID` int(11) NOT NULL,
+  `ErrorCode` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ErrorPage_Live`
@@ -1023,16 +937,12 @@ INSERT INTO `ErrorPage_Live` (`ID`, `ErrorCode`) VALUES
 -- Table structure for table `ErrorPage_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `ErrorPage_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ErrorPage_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `ErrorCode` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `ErrorCode` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1040,8 +950,8 @@ CREATE TABLE IF NOT EXISTS `ErrorPage_versions` (
 -- Table structure for table `File`
 --
 
-CREATE TABLE IF NOT EXISTS `File` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `File` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('File','Folder','Image','Image_Cached') DEFAULT 'File',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -1049,14 +959,10 @@ CREATE TABLE IF NOT EXISTS `File` (
   `Title` varchar(255) DEFAULT NULL,
   `Filename` mediumtext,
   `Content` mediumtext,
-  `ShowInSearch` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `ShowInSearch` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
   `ParentID` int(11) NOT NULL DEFAULT '0',
-  `OwnerID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `OwnerID` (`OwnerID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=279 ;
+  `OwnerID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `File`
@@ -1348,22 +1254,19 @@ INSERT INTO `File` (`ID`, `ClassName`, `LastEdited`, `Created`, `Name`, `Title`,
 -- Table structure for table `Group`
 --
 
-CREATE TABLE IF NOT EXISTS `Group` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Group` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('Group') DEFAULT 'Group',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Title` varchar(255) DEFAULT NULL,
   `Description` mediumtext,
   `Code` varchar(255) DEFAULT NULL,
-  `Locked` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `Locked` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `Sort` int(11) NOT NULL DEFAULT '0',
   `HtmlEditorConfig` mediumtext,
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Group`
@@ -1380,14 +1283,11 @@ INSERT INTO `Group` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, `Descr
 -- Table structure for table `Group_Members`
 --
 
-CREATE TABLE IF NOT EXISTS `Group_Members` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Group_Members` (
+  `ID` int(11) NOT NULL,
   `GroupID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `GroupID` (`GroupID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Group_Members`
@@ -1402,14 +1302,11 @@ INSERT INTO `Group_Members` (`ID`, `GroupID`, `MemberID`) VALUES
 -- Table structure for table `Group_Roles`
 --
 
-CREATE TABLE IF NOT EXISTS `Group_Roles` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Group_Roles` (
+  `ID` int(11) NOT NULL,
   `GroupID` int(11) NOT NULL DEFAULT '0',
-  `PermissionRoleID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `GroupID` (`GroupID`),
-  KEY `PermissionRoleID` (`PermissionRoleID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `PermissionRoleID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1417,19 +1314,16 @@ CREATE TABLE IF NOT EXISTS `Group_Roles` (
 -- Table structure for table `LoginAttempt`
 --
 
-CREATE TABLE IF NOT EXISTS `LoginAttempt` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `LoginAttempt` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('LoginAttempt') DEFAULT 'LoginAttempt',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Email` varchar(255) DEFAULT NULL,
   `Status` enum('Success','Failure') DEFAULT 'Success',
   `IP` varchar(255) DEFAULT NULL,
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `MemberID` (`MemberID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1437,8 +1331,8 @@ CREATE TABLE IF NOT EXISTS `LoginAttempt` (
 -- Table structure for table `Member`
 --
 
-CREATE TABLE IF NOT EXISTS `Member` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Member` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('Member') DEFAULT 'Member',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -1463,12 +1357,8 @@ CREATE TABLE IF NOT EXISTS `Member` (
   `TimeFormat` varchar(30) DEFAULT NULL,
   `URLSegment` varchar(50) DEFAULT NULL,
   `BlogProfileSummary` mediumtext,
-  `BlogProfileImageID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `Email` (`Email`),
-  KEY `ClassName` (`ClassName`),
-  KEY `BlogProfileImageID` (`BlogProfileImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `BlogProfileImageID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Member`
@@ -1483,19 +1373,16 @@ INSERT INTO `Member` (`ID`, `ClassName`, `LastEdited`, `Created`, `FirstName`, `
 -- Table structure for table `MemberPassword`
 --
 
-CREATE TABLE IF NOT EXISTS `MemberPassword` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `MemberPassword` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('MemberPassword') DEFAULT 'MemberPassword',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Password` varchar(160) DEFAULT NULL,
   `Salt` varchar(50) DEFAULT NULL,
   `PasswordEncryption` varchar(50) DEFAULT NULL,
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `MemberID` (`MemberID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `MemberPassword`
@@ -1511,18 +1398,16 @@ INSERT INTO `MemberPassword` (`ID`, `ClassName`, `LastEdited`, `Created`, `Passw
 -- Table structure for table `Page`
 --
 
-CREATE TABLE IF NOT EXISTS `Page` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Page` (
+  `ID` int(11) NOT NULL,
   `PageColor` varchar(6) DEFAULT NULL,
-  `LightTheme` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `NoBannerImage` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `LightTheme` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `NoBannerImage` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `BannerImageID` int(11) NOT NULL DEFAULT '0',
-  `LightText` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `BannerFullscreen` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `BannerLightText` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BannerImageID` (`BannerImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+  `LightText` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `BannerFullscreen` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `BannerLightText` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Page`
@@ -1550,18 +1435,16 @@ INSERT INTO `Page` (`ID`, `PageColor`, `LightTheme`, `NoBannerImage`, `BannerIma
 -- Table structure for table `Page_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `Page_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Page_Live` (
+  `ID` int(11) NOT NULL,
   `PageColor` varchar(6) DEFAULT NULL,
-  `LightTheme` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `NoBannerImage` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `LightTheme` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `NoBannerImage` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `BannerImageID` int(11) NOT NULL DEFAULT '0',
-  `LightText` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `BannerFullscreen` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `BannerLightText` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BannerImageID` (`BannerImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+  `LightText` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `BannerFullscreen` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `BannerLightText` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Page_Live`
@@ -1589,23 +1472,18 @@ INSERT INTO `Page_Live` (`ID`, `PageColor`, `LightTheme`, `NoBannerImage`, `Bann
 -- Table structure for table `Page_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `Page_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Page_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `PageColor` varchar(6) DEFAULT NULL,
-  `LightTheme` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `NoBannerImage` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `LightTheme` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `NoBannerImage` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `BannerImageID` int(11) NOT NULL DEFAULT '0',
-  `LightText` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `BannerFullscreen` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `BannerLightText` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `BannerImageID` (`BannerImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=134 ;
+  `LightText` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `BannerFullscreen` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `BannerLightText` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Page_versions`
@@ -1752,20 +1630,16 @@ INSERT INTO `Page_versions` (`ID`, `RecordID`, `Version`, `PageColor`, `LightThe
 -- Table structure for table `Permission`
 --
 
-CREATE TABLE IF NOT EXISTS `Permission` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Permission` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('Permission') DEFAULT 'Permission',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Code` varchar(50) DEFAULT NULL,
   `Arg` int(11) NOT NULL DEFAULT '0',
   `Type` int(11) NOT NULL DEFAULT '1',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `GroupID` (`GroupID`),
-  KEY `Code` (`Code`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Permission`
@@ -1785,16 +1659,14 @@ INSERT INTO `Permission` (`ID`, `ClassName`, `LastEdited`, `Created`, `Code`, `A
 -- Table structure for table `PermissionRole`
 --
 
-CREATE TABLE IF NOT EXISTS `PermissionRole` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `PermissionRole` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('PermissionRole') DEFAULT 'PermissionRole',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Title` varchar(50) DEFAULT NULL,
-  `OnlyAdminCanApply` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `OnlyAdminCanApply` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1802,17 +1674,14 @@ CREATE TABLE IF NOT EXISTS `PermissionRole` (
 -- Table structure for table `PermissionRoleCode`
 --
 
-CREATE TABLE IF NOT EXISTS `PermissionRoleCode` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `PermissionRoleCode` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('PermissionRoleCode') DEFAULT 'PermissionRoleCode',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Code` varchar(50) DEFAULT NULL,
-  `RoleID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `RoleID` (`RoleID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `RoleID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1820,14 +1689,12 @@ CREATE TABLE IF NOT EXISTS `PermissionRoleCode` (
 -- Table structure for table `RedirectorPage`
 --
 
-CREATE TABLE IF NOT EXISTS `RedirectorPage` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `RedirectorPage` (
+  `ID` int(11) NOT NULL,
   `RedirectionType` enum('Internal','External') DEFAULT 'Internal',
   `ExternalURL` varchar(2083) DEFAULT NULL,
-  `LinkToID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `LinkToID` (`LinkToID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LinkToID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1835,14 +1702,12 @@ CREATE TABLE IF NOT EXISTS `RedirectorPage` (
 -- Table structure for table `RedirectorPage_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `RedirectorPage_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `RedirectorPage_Live` (
+  `ID` int(11) NOT NULL,
   `RedirectionType` enum('Internal','External') DEFAULT 'Internal',
   `ExternalURL` varchar(2083) DEFAULT NULL,
-  `LinkToID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `LinkToID` (`LinkToID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LinkToID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1850,19 +1715,14 @@ CREATE TABLE IF NOT EXISTS `RedirectorPage_Live` (
 -- Table structure for table `RedirectorPage_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `RedirectorPage_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `RedirectorPage_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `RedirectionType` enum('Internal','External') DEFAULT 'Internal',
   `ExternalURL` varchar(2083) DEFAULT NULL,
-  `LinkToID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `LinkToID` (`LinkToID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LinkToID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1870,8 +1730,8 @@ CREATE TABLE IF NOT EXISTS `RedirectorPage_versions` (
 -- Table structure for table `SiteConfig`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteConfig` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteConfig` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('SiteConfig') DEFAULT 'SiteConfig',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -1889,12 +1749,8 @@ CREATE TABLE IF NOT EXISTS `SiteConfig` (
   `Email` varchar(250) DEFAULT NULL,
   `LogoID` int(11) NOT NULL DEFAULT '0',
   `LogoReverseID` int(11) NOT NULL DEFAULT '0',
-  `BrandColor` varchar(6) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `ClassName` (`ClassName`),
-  KEY `LogoID` (`LogoID`),
-  KEY `LogoReverseID` (`LogoReverseID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `BrandColor` varchar(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `SiteConfig`
@@ -1909,14 +1765,11 @@ INSERT INTO `SiteConfig` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, `
 -- Table structure for table `SiteConfig_CreateTopLevelGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteConfig_CreateTopLevelGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteConfig_CreateTopLevelGroups` (
+  `ID` int(11) NOT NULL,
   `SiteConfigID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteConfigID` (`SiteConfigID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1924,14 +1777,11 @@ CREATE TABLE IF NOT EXISTS `SiteConfig_CreateTopLevelGroups` (
 -- Table structure for table `SiteConfig_EditorGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteConfig_EditorGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteConfig_EditorGroups` (
+  `ID` int(11) NOT NULL,
   `SiteConfigID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteConfigID` (`SiteConfigID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1939,14 +1789,11 @@ CREATE TABLE IF NOT EXISTS `SiteConfig_EditorGroups` (
 -- Table structure for table `SiteConfig_ViewerGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteConfig_ViewerGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteConfig_ViewerGroups` (
+  `ID` int(11) NOT NULL,
   `SiteConfigID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteConfigID` (`SiteConfigID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1954,8 +1801,8 @@ CREATE TABLE IF NOT EXISTS `SiteConfig_ViewerGroups` (
 -- Table structure for table `SiteTree`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('SiteTree','Page','Blog','BlogPost','BlogEntry','ErrorPage','RedirectorPage','VirtualPage','BlogTree','BlogHolder') DEFAULT 'SiteTree',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -1965,21 +1812,17 @@ CREATE TABLE IF NOT EXISTS `SiteTree` (
   `Content` mediumtext,
   `MetaDescription` mediumtext,
   `ExtraMeta` mediumtext,
-  `ShowInMenus` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowInSearch` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ShowInMenus` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowInSearch` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `Sort` int(11) NOT NULL DEFAULT '0',
-  `HasBrokenFile` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `HasBrokenLink` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `HasBrokenFile` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `HasBrokenLink` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ReportClass` varchar(50) DEFAULT NULL,
   `CanViewType` enum('Anyone','LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `CanEditType` enum('LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `URLSegment` (`URLSegment`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `SiteTree`
@@ -1989,11 +1832,11 @@ INSERT INTO `SiteTree` (`ID`, `ClassName`, `LastEdited`, `Created`, `URLSegment`
 (1, 'Blog', '2016-03-07 16:55:07', '2016-02-11 10:41:23', 'home', 'Home', NULL, '<p class="lead">Photos, videos and stories from a small kiwi getting lost in the big wide world</p>', NULL, NULL, 0, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 14, 0),
 (2, 'Page', '2016-02-17 10:25:33', '2016-02-11 10:41:24', 'about-us', 'About Us', NULL, '<p class="lead">Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>\n<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna mollis ornare vel eu leo.</p>\n<p>Cras mattis consectetur purus sit amet fermentum.</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 2, 0),
 (3, 'Page', '2016-02-17 10:25:45', '2016-02-11 10:41:24', 'contact-us', 'Contact Us', NULL, '<p class="lead">Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>\n<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna mollis ornare vel eu leo.</p>\n<p>Cras mattis consectetur purus sit amet fermentum.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 2, 0),
-(4, 'ErrorPage', '2016-02-11 10:41:25', '2016-02-11 10:41:24', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn''t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 4, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
+(4, 'ErrorPage', '2016-02-11 10:41:25', '2016-02-11 10:41:24', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn\'t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 4, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
 (5, 'ErrorPage', '2016-02-11 10:41:25', '2016-02-11 10:41:24', 'server-error', 'Server error', NULL, '<p>Sorry, there was a problem with handling your request.</p>', NULL, NULL, 0, 0, 5, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
 (6, 'BlogPost', '2016-03-07 16:26:40', '2016-02-11 11:02:46', 'chaotic-paradise', 'Bali Diaries', NULL, '<p class="lead">I travelled to Bali expecting an island holiday but it turned into the most remarkably diverse adventure full of tooting scooters and lush green countryside. </p>', NULL, NULL, 0, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 27, 1),
 (13, 'BlogPost', '2016-03-27 11:13:19', '2016-03-07 08:58:23', 'sights-and-speed-of-bangkok', 'Sights and Speed of Bangkok', NULL, '<p class="lead">Exploring a big city full of speeding tuk tuks and glistening golden temples.</p>', NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 10, 1),
-(14, 'BlogPost', '2016-03-27 11:49:27', '2016-03-07 16:27:21', 'the-beauty-of-chiang-mai', 'The Beauty of Chiang Mai', NULL, '<p class="lead">I bet you didn''t think peaceful Monks and Rihanna impersonating Ladyboys could make it together in one blog post...</p>', NULL, NULL, 0, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 7, 1),
+(14, 'BlogPost', '2016-03-27 11:49:27', '2016-03-07 16:27:21', 'the-beauty-of-chiang-mai', 'The Beauty of Chiang Mai', NULL, '<p class="lead">I bet you didn\'t think peaceful Monks and Rihanna impersonating Ladyboys could make it together in one blog post...</p>', NULL, NULL, 0, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 7, 1),
 (15, 'BlogPost', '2016-03-30 16:35:36', '2016-03-07 16:56:45', 'welcome-to-my-blog', 'Welcome...', NULL, NULL, NULL, NULL, 0, 1, 4, 0, 0, NULL, 'Inherit', 'Inherit', 10, 1),
 (16, 'BlogPost', '2016-03-30 14:01:41', '2016-03-13 10:03:15', 'the-mighty-mekong', 'The Mighty Mekong', NULL, NULL, NULL, NULL, 0, 1, 5, 0, 0, NULL, 'Inherit', 'Inherit', 4, 1),
 (17, 'BlogPost', '2016-03-30 13:21:59', '2016-03-27 11:00:37', 'batman-inside-a-temple', 'Batman inside a temple?', NULL, '<p class="lead">Wat Rong Khun Temple - The White Temple</p>', NULL, NULL, 0, 1, 6, 0, 0, NULL, 'Inherit', 'Inherit', 6, 1),
@@ -2009,14 +1852,11 @@ INSERT INTO `SiteTree` (`ID`, `ClassName`, `LastEdited`, `Created`, `URLSegment`
 -- Table structure for table `SiteTree_EditorGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_EditorGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_EditorGroups` (
+  `ID` int(11) NOT NULL,
   `SiteTreeID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteTreeID` (`SiteTreeID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2024,15 +1864,12 @@ CREATE TABLE IF NOT EXISTS `SiteTree_EditorGroups` (
 -- Table structure for table `SiteTree_ImageTracking`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_ImageTracking` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_ImageTracking` (
+  `ID` int(11) NOT NULL,
   `SiteTreeID` int(11) NOT NULL DEFAULT '0',
   `FileID` int(11) NOT NULL DEFAULT '0',
-  `FieldName` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `SiteTreeID` (`SiteTreeID`),
-  KEY `FileID` (`FileID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `FieldName` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2040,15 +1877,12 @@ CREATE TABLE IF NOT EXISTS `SiteTree_ImageTracking` (
 -- Table structure for table `SiteTree_LinkTracking`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_LinkTracking` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_LinkTracking` (
+  `ID` int(11) NOT NULL,
   `SiteTreeID` int(11) NOT NULL DEFAULT '0',
   `ChildID` int(11) NOT NULL DEFAULT '0',
-  `FieldName` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `SiteTreeID` (`SiteTreeID`),
-  KEY `ChildID` (`ChildID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `FieldName` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2056,8 +1890,8 @@ CREATE TABLE IF NOT EXISTS `SiteTree_LinkTracking` (
 -- Table structure for table `SiteTree_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_Live` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('SiteTree','Page','Blog','BlogPost','BlogEntry','ErrorPage','RedirectorPage','VirtualPage','BlogTree','BlogHolder') DEFAULT 'SiteTree',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -2067,21 +1901,17 @@ CREATE TABLE IF NOT EXISTS `SiteTree_Live` (
   `Content` mediumtext,
   `MetaDescription` mediumtext,
   `ExtraMeta` mediumtext,
-  `ShowInMenus` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowInSearch` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ShowInMenus` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowInSearch` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `Sort` int(11) NOT NULL DEFAULT '0',
-  `HasBrokenFile` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `HasBrokenLink` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `HasBrokenFile` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `HasBrokenLink` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ReportClass` varchar(50) DEFAULT NULL,
   `CanViewType` enum('Anyone','LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `CanEditType` enum('LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `URLSegment` (`URLSegment`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `SiteTree_Live`
@@ -2091,11 +1921,11 @@ INSERT INTO `SiteTree_Live` (`ID`, `ClassName`, `LastEdited`, `Created`, `URLSeg
 (1, 'Blog', '2016-03-07 16:55:07', '2016-02-11 10:41:23', 'home', 'Home', NULL, '<p class="lead">Photos, videos and stories from a small kiwi getting lost in the big wide world</p>', NULL, NULL, 0, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 14, 0),
 (2, 'Page', '2016-02-17 10:25:34', '2016-02-11 10:41:24', 'about-us', 'About Us', NULL, '<p class="lead">Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>\n<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna mollis ornare vel eu leo.</p>\n<p>Cras mattis consectetur purus sit amet fermentum.</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 2, 0),
 (3, 'Page', '2016-02-17 10:25:45', '2016-02-11 10:41:24', 'contact-us', 'Contact Us', NULL, '<p class="lead">Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>\n<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna mollis ornare vel eu leo.</p>\n<p>Cras mattis consectetur purus sit amet fermentum.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 2, 0),
-(4, 'ErrorPage', '2016-02-11 10:41:33', '2016-02-11 10:41:24', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn''t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 4, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
+(4, 'ErrorPage', '2016-02-11 10:41:33', '2016-02-11 10:41:24', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn\'t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 4, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
 (5, 'ErrorPage', '2016-02-11 10:41:24', '2016-02-11 10:41:24', 'server-error', 'Server error', NULL, '<p>Sorry, there was a problem with handling your request.</p>', NULL, NULL, 0, 0, 5, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
 (6, 'BlogPost', '2016-03-07 16:26:40', '2016-02-11 11:02:46', 'chaotic-paradise', 'Bali Diaries', NULL, '<p class="lead">I travelled to Bali expecting an island holiday but it turned into the most remarkably diverse adventure full of tooting scooters and lush green countryside. </p>', NULL, NULL, 0, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 27, 1),
 (13, 'BlogPost', '2016-03-27 11:13:19', '2016-03-07 08:58:23', 'sights-and-speed-of-bangkok', 'Sights and Speed of Bangkok', NULL, '<p class="lead">Exploring a big city full of speeding tuk tuks and glistening golden temples.</p>', NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 10, 1),
-(14, 'BlogPost', '2016-03-27 11:49:27', '2016-03-07 16:27:21', 'the-beauty-of-chiang-mai', 'The Beauty of Chiang Mai', NULL, '<p class="lead">I bet you didn''t think peaceful Monks and Rihanna impersonating Ladyboys could make it together in one blog post...</p>', NULL, NULL, 0, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 7, 1),
+(14, 'BlogPost', '2016-03-27 11:49:27', '2016-03-07 16:27:21', 'the-beauty-of-chiang-mai', 'The Beauty of Chiang Mai', NULL, '<p class="lead">I bet you didn\'t think peaceful Monks and Rihanna impersonating Ladyboys could make it together in one blog post...</p>', NULL, NULL, 0, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 7, 1),
 (15, 'BlogPost', '2016-03-30 16:35:36', '2016-03-07 16:56:45', 'welcome-to-my-blog', 'Welcome...', NULL, NULL, NULL, NULL, 0, 1, 4, 0, 0, NULL, 'Inherit', 'Inherit', 10, 1),
 (16, 'BlogPost', '2016-03-30 14:01:41', '2016-03-13 10:03:15', 'the-mighty-mekong', 'The Mighty Mekong', NULL, NULL, NULL, NULL, 0, 1, 5, 0, 0, NULL, 'Inherit', 'Inherit', 4, 1),
 (17, 'BlogPost', '2016-03-30 13:21:59', '2016-03-27 11:00:37', 'batman-inside-a-temple', 'Batman inside a temple?', NULL, '<p class="lead">Wat Rong Khun Temple - The White Temple</p>', NULL, NULL, 0, 1, 6, 0, 0, NULL, 'Inherit', 'Inherit', 6, 1),
@@ -2111,11 +1941,11 @@ INSERT INTO `SiteTree_Live` (`ID`, `ClassName`, `LastEdited`, `Created`, `URLSeg
 -- Table structure for table `SiteTree_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `WasPublished` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `WasPublished` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `AuthorID` int(11) NOT NULL DEFAULT '0',
   `PublisherID` int(11) NOT NULL DEFAULT '0',
   `ClassName` enum('SiteTree','Page','Blog','BlogPost','BlogEntry','ErrorPage','RedirectorPage','VirtualPage','BlogTree','BlogHolder') DEFAULT 'SiteTree',
@@ -2127,25 +1957,16 @@ CREATE TABLE IF NOT EXISTS `SiteTree_versions` (
   `Content` mediumtext,
   `MetaDescription` mediumtext,
   `ExtraMeta` mediumtext,
-  `ShowInMenus` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowInSearch` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ShowInMenus` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowInSearch` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `Sort` int(11) NOT NULL DEFAULT '0',
-  `HasBrokenFile` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `HasBrokenLink` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `HasBrokenFile` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `HasBrokenLink` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ReportClass` varchar(50) DEFAULT NULL,
   `CanViewType` enum('Anyone','LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `CanEditType` enum('LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `AuthorID` (`AuthorID`),
-  KEY `PublisherID` (`PublisherID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `URLSegment` (`URLSegment`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=139 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `SiteTree_versions`
@@ -2155,7 +1976,7 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 (1, 1, 1, 1, 0, 0, 'Page', '2016-02-11 10:41:23', '2016-02-11 10:41:23', 'home', 'Home', NULL, '<p>Welcome to SilverStripe! This is the default homepage. You can edit this page by opening <a href="admin/">the CMS</a>.</p><p>You can now access the <a href="http://docs.silverstripe.org">developer documentation</a>, or begin the <a href="http://www.silverstripe.org/learn/lessons">SilverStripe lessons</a>.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (2, 2, 1, 1, 0, 0, 'Page', '2016-02-11 10:41:24', '2016-02-11 10:41:24', 'about-us', 'About Us', NULL, '<p>You can fill this page out with your own content, or delete it and create your own pages.<br></p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (3, 3, 1, 1, 0, 0, 'Page', '2016-02-11 10:41:24', '2016-02-11 10:41:24', 'contact-us', 'Contact Us', NULL, '<p>You can fill this page out with your own content, or delete it and create your own pages.<br></p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 0),
-(4, 4, 1, 1, 0, 0, 'ErrorPage', '2016-02-11 10:41:24', '2016-02-11 10:41:24', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn''t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 4, 0, 0, NULL, 'Inherit', 'Inherit', 0),
+(4, 4, 1, 1, 0, 0, 'ErrorPage', '2016-02-11 10:41:24', '2016-02-11 10:41:24', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn\'t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 4, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (5, 5, 1, 1, 0, 0, 'ErrorPage', '2016-02-11 10:41:24', '2016-02-11 10:41:24', 'server-error', 'Server error', NULL, '<p>Sorry, there was a problem with handling your request.</p>', NULL, NULL, 0, 0, 5, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (6, 1, 2, 1, 1, 1, '', '2016-02-11 11:02:17', '2016-02-11 10:41:23', 'home', 'Home', NULL, '<p>Welcome to SilverStripe! This is the default homepage. You can edit this page by opening <a href="admin/">the CMS</a>.</p><p>You can now access the <a href="http://docs.silverstripe.org">developer documentation</a>, or begin the <a href="http://www.silverstripe.org/learn/lessons">SilverStripe lessons</a>.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (7, 1, 3, 1, 1, 1, 'Blog', '2016-02-11 11:02:34', '2016-02-11 10:41:23', 'home', 'Home', NULL, '<p>Welcome to SilverStripe! This is the default homepage. You can edit this page by opening <a href="admin/">the CMS</a>.</p><p>You can now access the <a href="http://docs.silverstripe.org">developer documentation</a>, or begin the <a href="http://www.silverstripe.org/learn/lessons">SilverStripe lessons</a>.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
@@ -2230,7 +2051,7 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 (76, 14, 5, 1, 1, 1, 'BlogPost', '2016-03-07 16:34:44', '2016-03-07 16:27:21', 'the-beauty-of-chiang-mai', 'The Beauty of Chiang Mai', NULL, NULL, NULL, NULL, 0, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 1),
 (77, 14, 6, 1, 1, 1, 'BlogPost', '2016-03-07 16:36:27', '2016-03-07 16:27:21', 'the-beauty-of-chiang-mai', 'The Beauty of Chiang Mai', NULL, NULL, NULL, NULL, 0, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 1),
 (78, 13, 9, 1, 1, 1, 'BlogPost', '2016-03-07 16:36:52', '2016-03-07 08:58:23', 'sights-and-speed-of-bangkok', 'Sights and Speed of Bangkok', NULL, '<p class="lead">Exploring a big city full of speeding tuk tuks, glistening golden temples and mouth-watering street food.</p>', NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 1),
-(79, 14, 7, 1, 1, 1, 'BlogPost', '2016-03-07 16:50:56', '2016-03-07 16:27:21', 'the-beauty-of-chiang-mai', 'The Beauty of Chiang Mai', NULL, '<p class="lead">I bet you didn''t think peaceful Monks and Rihanna impersonating Ladyboys could make it together in one blog post...</p>', NULL, NULL, 0, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 1),
+(79, 14, 7, 1, 1, 1, 'BlogPost', '2016-03-07 16:50:56', '2016-03-07 16:27:21', 'the-beauty-of-chiang-mai', 'The Beauty of Chiang Mai', NULL, '<p class="lead">I bet you didn\'t think peaceful Monks and Rihanna impersonating Ladyboys could make it together in one blog post...</p>', NULL, NULL, 0, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 1),
 (80, 1, 13, 1, 1, 1, 'Blog', '2016-03-07 16:53:50', '2016-02-11 10:41:23', 'home', 'Home', NULL, '<p class="lead">Photos, videos and stories from a small kiwi getting lost in the big wide world</p>', NULL, NULL, 0, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (81, 1, 14, 1, 1, 1, 'Blog', '2016-03-07 16:54:41', '2016-02-11 10:41:23', 'home', 'Home', NULL, '<p class="lead">Photos, videos and stories from a small kiwi getting lost in the big wide world</p>', NULL, NULL, 0, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (82, 15, 1, 0, 1, 0, 'BlogPost', '2016-03-07 16:56:45', '2016-03-07 16:56:45', 'new-blog-post', 'New Blog Post', NULL, NULL, NULL, NULL, 0, 1, 4, 0, 0, NULL, 'Inherit', 'Inherit', 1),
@@ -2298,14 +2119,11 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 -- Table structure for table `SiteTree_ViewerGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_ViewerGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_ViewerGroups` (
+  `ID` int(11) NOT NULL,
   `SiteTreeID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteTreeID` (`SiteTreeID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2313,13 +2131,11 @@ CREATE TABLE IF NOT EXISTS `SiteTree_ViewerGroups` (
 -- Table structure for table `VirtualPage`
 --
 
-CREATE TABLE IF NOT EXISTS `VirtualPage` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `VirtualPage` (
+  `ID` int(11) NOT NULL,
   `VersionID` int(11) NOT NULL DEFAULT '0',
-  `CopyContentFromID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `CopyContentFromID` (`CopyContentFromID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `CopyContentFromID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2327,13 +2143,11 @@ CREATE TABLE IF NOT EXISTS `VirtualPage` (
 -- Table structure for table `VirtualPage_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `VirtualPage_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `VirtualPage_Live` (
+  `ID` int(11) NOT NULL,
   `VersionID` int(11) NOT NULL DEFAULT '0',
-  `CopyContentFromID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `CopyContentFromID` (`CopyContentFromID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `CopyContentFromID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2341,19 +2155,823 @@ CREATE TABLE IF NOT EXISTS `VirtualPage_Live` (
 -- Table structure for table `VirtualPage_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `VirtualPage_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `VirtualPage_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `VersionID` int(11) NOT NULL DEFAULT '0',
-  `CopyContentFromID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `CopyContentFromID` (`CopyContentFromID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `CopyContentFromID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Blog`
+--
+ALTER TABLE `Blog`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `BlogCategory`
+--
+ALTER TABLE `BlogCategory`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `BlogEntry`
+--
+ALTER TABLE `BlogEntry`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `BlogEntry_Live`
+--
+ALTER TABLE `BlogEntry_Live`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `BlogEntry_versions`
+--
+ALTER TABLE `BlogEntry_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`);
+
+--
+-- Indexes for table `BlogHolder`
+--
+ALTER TABLE `BlogHolder`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `OwnerID` (`OwnerID`);
+
+--
+-- Indexes for table `BlogHolder_Live`
+--
+ALTER TABLE `BlogHolder_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `OwnerID` (`OwnerID`);
+
+--
+-- Indexes for table `BlogHolder_versions`
+--
+ALTER TABLE `BlogHolder_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `OwnerID` (`OwnerID`);
+
+--
+-- Indexes for table `BlogPost`
+--
+ALTER TABLE `BlogPost`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FeaturedImageID` (`FeaturedImageID`),
+  ADD KEY `ThumbnailImageID` (`ThumbnailImageID`),
+  ADD KEY `CountryID` (`CountryID`),
+  ADD KEY `CountryIDID` (`CountryIDID`);
+
+--
+-- Indexes for table `BlogPost_Authors`
+--
+ALTER TABLE `BlogPost_Authors`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogPostID` (`BlogPostID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `BlogPost_Categories`
+--
+ALTER TABLE `BlogPost_Categories`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogPostID` (`BlogPostID`),
+  ADD KEY `BlogCategoryID` (`BlogCategoryID`);
+
+--
+-- Indexes for table `BlogPost_Live`
+--
+ALTER TABLE `BlogPost_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FeaturedImageID` (`FeaturedImageID`),
+  ADD KEY `ThumbnailImageID` (`ThumbnailImageID`),
+  ADD KEY `CountryID` (`CountryID`),
+  ADD KEY `CountryIDID` (`CountryIDID`);
+
+--
+-- Indexes for table `BlogPost_Tags`
+--
+ALTER TABLE `BlogPost_Tags`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogPostID` (`BlogPostID`),
+  ADD KEY `BlogTagID` (`BlogTagID`);
+
+--
+-- Indexes for table `BlogPost_versions`
+--
+ALTER TABLE `BlogPost_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `FeaturedImageID` (`FeaturedImageID`),
+  ADD KEY `ThumbnailImageID` (`ThumbnailImageID`),
+  ADD KEY `CountryID` (`CountryID`),
+  ADD KEY `CountryIDID` (`CountryIDID`);
+
+--
+-- Indexes for table `BlogSection`
+--
+ALTER TABLE `BlogSection`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `MainImageID` (`MainImageID`),
+  ADD KEY `ClassName` (`ClassName`),
+  ADD KEY `ParentID` (`ParentID`);
+
+--
+-- Indexes for table `BlogSection_SectionImages`
+--
+ALTER TABLE `BlogSection_SectionImages`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogSectionID` (`BlogSectionID`),
+  ADD KEY `ImageID` (`ImageID`);
+
+--
+-- Indexes for table `BlogTag`
+--
+ALTER TABLE `BlogTag`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `BlogTree`
+--
+ALTER TABLE `BlogTree`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `BlogTree_Live`
+--
+ALTER TABLE `BlogTree_Live`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `BlogTree_versions`
+--
+ALTER TABLE `BlogTree_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`);
+
+--
+-- Indexes for table `Blog_Contributors`
+--
+ALTER TABLE `Blog_Contributors`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `Blog_Editors`
+--
+ALTER TABLE `Blog_Editors`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `Blog_Live`
+--
+ALTER TABLE `Blog_Live`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `Blog_versions`
+--
+ALTER TABLE `Blog_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`);
+
+--
+-- Indexes for table `Blog_Writers`
+--
+ALTER TABLE `Blog_Writers`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `ContactRequest`
+--
+ALTER TABLE `ContactRequest`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Country`
+--
+ALTER TABLE `Country`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `PatternID` (`PatternID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Country_BlogPosts`
+--
+ALTER TABLE `Country_BlogPosts`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `CountryID` (`CountryID`),
+  ADD KEY `BlogPostID` (`BlogPostID`);
+
+--
+-- Indexes for table `ErrorPage`
+--
+ALTER TABLE `ErrorPage`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `ErrorPage_Live`
+--
+ALTER TABLE `ErrorPage_Live`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `ErrorPage_versions`
+--
+ALTER TABLE `ErrorPage_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`);
+
+--
+-- Indexes for table `File`
+--
+ALTER TABLE `File`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `OwnerID` (`OwnerID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Group`
+--
+ALTER TABLE `Group`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Group_Members`
+--
+ALTER TABLE `Group_Members`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `GroupID` (`GroupID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `Group_Roles`
+--
+ALTER TABLE `Group_Roles`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `GroupID` (`GroupID`),
+  ADD KEY `PermissionRoleID` (`PermissionRoleID`);
+
+--
+-- Indexes for table `LoginAttempt`
+--
+ALTER TABLE `LoginAttempt`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `MemberID` (`MemberID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Member`
+--
+ALTER TABLE `Member`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `Email` (`Email`),
+  ADD KEY `ClassName` (`ClassName`),
+  ADD KEY `BlogProfileImageID` (`BlogProfileImageID`);
+
+--
+-- Indexes for table `MemberPassword`
+--
+ALTER TABLE `MemberPassword`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `MemberID` (`MemberID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Page`
+--
+ALTER TABLE `Page`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BannerImageID` (`BannerImageID`);
+
+--
+-- Indexes for table `Page_Live`
+--
+ALTER TABLE `Page_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BannerImageID` (`BannerImageID`);
+
+--
+-- Indexes for table `Page_versions`
+--
+ALTER TABLE `Page_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `BannerImageID` (`BannerImageID`);
+
+--
+-- Indexes for table `Permission`
+--
+ALTER TABLE `Permission`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `GroupID` (`GroupID`),
+  ADD KEY `Code` (`Code`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `PermissionRole`
+--
+ALTER TABLE `PermissionRole`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `PermissionRoleCode`
+--
+ALTER TABLE `PermissionRoleCode`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `RoleID` (`RoleID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `RedirectorPage`
+--
+ALTER TABLE `RedirectorPage`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `LinkToID` (`LinkToID`);
+
+--
+-- Indexes for table `RedirectorPage_Live`
+--
+ALTER TABLE `RedirectorPage_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `LinkToID` (`LinkToID`);
+
+--
+-- Indexes for table `RedirectorPage_versions`
+--
+ALTER TABLE `RedirectorPage_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `LinkToID` (`LinkToID`);
+
+--
+-- Indexes for table `SiteConfig`
+--
+ALTER TABLE `SiteConfig`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ClassName` (`ClassName`),
+  ADD KEY `LogoID` (`LogoID`),
+  ADD KEY `LogoReverseID` (`LogoReverseID`);
+
+--
+-- Indexes for table `SiteConfig_CreateTopLevelGroups`
+--
+ALTER TABLE `SiteConfig_CreateTopLevelGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteConfigID` (`SiteConfigID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `SiteConfig_EditorGroups`
+--
+ALTER TABLE `SiteConfig_EditorGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteConfigID` (`SiteConfigID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `SiteConfig_ViewerGroups`
+--
+ALTER TABLE `SiteConfig_ViewerGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteConfigID` (`SiteConfigID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `SiteTree`
+--
+ALTER TABLE `SiteTree`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `URLSegment` (`URLSegment`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `SiteTree_EditorGroups`
+--
+ALTER TABLE `SiteTree_EditorGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteTreeID` (`SiteTreeID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `SiteTree_ImageTracking`
+--
+ALTER TABLE `SiteTree_ImageTracking`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteTreeID` (`SiteTreeID`),
+  ADD KEY `FileID` (`FileID`);
+
+--
+-- Indexes for table `SiteTree_LinkTracking`
+--
+ALTER TABLE `SiteTree_LinkTracking`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteTreeID` (`SiteTreeID`),
+  ADD KEY `ChildID` (`ChildID`);
+
+--
+-- Indexes for table `SiteTree_Live`
+--
+ALTER TABLE `SiteTree_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `URLSegment` (`URLSegment`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `SiteTree_versions`
+--
+ALTER TABLE `SiteTree_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `AuthorID` (`AuthorID`),
+  ADD KEY `PublisherID` (`PublisherID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `URLSegment` (`URLSegment`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `SiteTree_ViewerGroups`
+--
+ALTER TABLE `SiteTree_ViewerGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteTreeID` (`SiteTreeID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `VirtualPage`
+--
+ALTER TABLE `VirtualPage`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `CopyContentFromID` (`CopyContentFromID`);
+
+--
+-- Indexes for table `VirtualPage_Live`
+--
+ALTER TABLE `VirtualPage_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `CopyContentFromID` (`CopyContentFromID`);
+
+--
+-- Indexes for table `VirtualPage_versions`
+--
+ALTER TABLE `VirtualPage_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `CopyContentFromID` (`CopyContentFromID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Blog`
+--
+ALTER TABLE `Blog`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `BlogCategory`
+--
+ALTER TABLE `BlogCategory`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogEntry`
+--
+ALTER TABLE `BlogEntry`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogEntry_Live`
+--
+ALTER TABLE `BlogEntry_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogEntry_versions`
+--
+ALTER TABLE `BlogEntry_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogHolder`
+--
+ALTER TABLE `BlogHolder`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogHolder_Live`
+--
+ALTER TABLE `BlogHolder_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogHolder_versions`
+--
+ALTER TABLE `BlogHolder_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogPost`
+--
+ALTER TABLE `BlogPost`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT for table `BlogPost_Authors`
+--
+ALTER TABLE `BlogPost_Authors`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `BlogPost_Categories`
+--
+ALTER TABLE `BlogPost_Categories`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogPost_Live`
+--
+ALTER TABLE `BlogPost_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT for table `BlogPost_Tags`
+--
+ALTER TABLE `BlogPost_Tags`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogPost_versions`
+--
+ALTER TABLE `BlogPost_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+--
+-- AUTO_INCREMENT for table `BlogSection`
+--
+ALTER TABLE `BlogSection`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+--
+-- AUTO_INCREMENT for table `BlogSection_SectionImages`
+--
+ALTER TABLE `BlogSection_SectionImages`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+--
+-- AUTO_INCREMENT for table `BlogTag`
+--
+ALTER TABLE `BlogTag`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogTree`
+--
+ALTER TABLE `BlogTree`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogTree_Live`
+--
+ALTER TABLE `BlogTree_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogTree_versions`
+--
+ALTER TABLE `BlogTree_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Blog_Contributors`
+--
+ALTER TABLE `Blog_Contributors`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Blog_Editors`
+--
+ALTER TABLE `Blog_Editors`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Blog_Live`
+--
+ALTER TABLE `Blog_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `Blog_versions`
+--
+ALTER TABLE `Blog_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `Blog_Writers`
+--
+ALTER TABLE `Blog_Writers`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ContactRequest`
+--
+ALTER TABLE `ContactRequest`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Country`
+--
+ALTER TABLE `Country`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `Country_BlogPosts`
+--
+ALTER TABLE `Country_BlogPosts`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ErrorPage`
+--
+ALTER TABLE `ErrorPage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `ErrorPage_Live`
+--
+ALTER TABLE `ErrorPage_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `ErrorPage_versions`
+--
+ALTER TABLE `ErrorPage_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `File`
+--
+ALTER TABLE `File`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=279;
+--
+-- AUTO_INCREMENT for table `Group`
+--
+ALTER TABLE `Group`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `Group_Members`
+--
+ALTER TABLE `Group_Members`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `Group_Roles`
+--
+ALTER TABLE `Group_Roles`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `LoginAttempt`
+--
+ALTER TABLE `LoginAttempt`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Member`
+--
+ALTER TABLE `Member`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `MemberPassword`
+--
+ALTER TABLE `MemberPassword`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `Page`
+--
+ALTER TABLE `Page`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT for table `Page_Live`
+--
+ALTER TABLE `Page_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT for table `Page_versions`
+--
+ALTER TABLE `Page_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+--
+-- AUTO_INCREMENT for table `Permission`
+--
+ALTER TABLE `Permission`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `PermissionRole`
+--
+ALTER TABLE `PermissionRole`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `PermissionRoleCode`
+--
+ALTER TABLE `PermissionRoleCode`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `RedirectorPage`
+--
+ALTER TABLE `RedirectorPage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `RedirectorPage_Live`
+--
+ALTER TABLE `RedirectorPage_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `RedirectorPage_versions`
+--
+ALTER TABLE `RedirectorPage_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteConfig`
+--
+ALTER TABLE `SiteConfig`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `SiteConfig_CreateTopLevelGroups`
+--
+ALTER TABLE `SiteConfig_CreateTopLevelGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteConfig_EditorGroups`
+--
+ALTER TABLE `SiteConfig_EditorGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteConfig_ViewerGroups`
+--
+ALTER TABLE `SiteConfig_ViewerGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteTree`
+--
+ALTER TABLE `SiteTree`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT for table `SiteTree_EditorGroups`
+--
+ALTER TABLE `SiteTree_EditorGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteTree_ImageTracking`
+--
+ALTER TABLE `SiteTree_ImageTracking`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteTree_LinkTracking`
+--
+ALTER TABLE `SiteTree_LinkTracking`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteTree_Live`
+--
+ALTER TABLE `SiteTree_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT for table `SiteTree_versions`
+--
+ALTER TABLE `SiteTree_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+--
+-- AUTO_INCREMENT for table `SiteTree_ViewerGroups`
+--
+ALTER TABLE `SiteTree_ViewerGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `VirtualPage`
+--
+ALTER TABLE `VirtualPage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `VirtualPage_Live`
+--
+ALTER TABLE `VirtualPage_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `VirtualPage_versions`
+--
+ALTER TABLE `VirtualPage_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
